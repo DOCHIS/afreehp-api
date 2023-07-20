@@ -1,0 +1,101 @@
+service: afreehp-api
+
+# provider 설정
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: ap-northeast-2
+  architecture: arm64
+  memorySize: 512
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - apigateway:ManageConnections
+        - execute-api:ManageConnection
+      Resource: 'arn:aws:execute-api:ap-northeast-2:*:*'
+    - Effect: Allow
+      Action:
+        - sqs:SendMessage
+        - sqs:ReceiveMessage
+        - sqs:DeleteMessage
+        - sqs:GetQueueAttributes
+      Resource: 'arn:aws:sqs:ap-northeast-2:*:*'
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 'arn:aws:dynamodb:ap-northeast-2:*:*'
+
+# plugins 설정
+plugins:
+  - serverless-offline
+
+# functions 설정
+functions:
+  app:
+    handler: handler/app.handler
+    environment: ${file(env.js)}
+    events:
+      - httpApi: "*"
+  event:
+    handler: handler/event.handler
+    environment: ${file(env.js)}
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - afreehpEventQueue
+              - Arn
+  connect:
+    timeout: 5
+    handler: handler/websocket.connect
+    environment: ${file(env.js)}
+    events:
+      - websocket:
+          route: $connect
+  disconnect:
+    timeout: 5
+    handler: handler/websocket.disconnect
+    environment: ${file(env.js)}
+    events:
+      - websocket:
+          route: $disconnect
+  message:
+    timeout: 10
+    handler: handler/websocket.message
+    environment: ${file(env.js)}
+    events:
+      - websocket:
+          route: $default
+
+# resources 설정
+resources:
+  Resources:
+    afreehpEventQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: afreehpEventQueue.fifo
+        FifoQueue: true
+        MessageRetentionPeriod: 86400
+        ReceiveMessageWaitTimeSeconds: 20
+        VisibilityTimeout: 60
+    afreehpTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: afreehp
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
