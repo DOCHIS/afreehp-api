@@ -29,6 +29,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:CreateTable
       Resource: 'arn:aws:dynamodb:ap-northeast-2:*:*'
 
 # plugins 설정
@@ -43,7 +44,7 @@ functions:
     timeout: 10
     environment: ${file(env.js)}
     events:
-      - httpApi: "*"
+      - httpApi: '*'
   event:
     handler: handler/event.handler
     timeout: 10
@@ -110,9 +111,11 @@ constructs:
     domain: afreehp.dochis.net
     certificate: arn:aws:acm:us-east-1:048901423835:certificate/a4b11e86-a541-4bae-bd2c-56cab6c0a7dc
     assets:
-      "/assets/**": public/assets
+      '/app/**': public/app
+      '/static/**': public/static
 
 # package 설정
 package:
   exclude:
+    - .github/**
     - public/**

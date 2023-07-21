@@ -29,6 +29,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:CreateTable
       Resource: 'arn:aws:dynamodb:ap-northeast-2:*:*'
 
 # plugins 설정

@@ -2,9 +2,11 @@
 이 프로젝트는 아프리카 도우미를 통해 후원 내역과 룰렛 결과 등을 API로 조회할 수 있도록 제작된 프로젝트입니다.
 
 ## License
-저작자와 출처를 표기 할 의무가 없으며 원하는 목적으로 사용할 수 있습니다.
-이 프로젝트는 아프리카TV와 아프리카 도우미의 비공식 API를 임의로 사용하여 제작되었으며, 사용함으로써 발생하는 모든 책임은 사용자에게 있습니다.
-또한 이 프로젝트는 품질과 안정성을 보증하지 않습니다.
+이 프로젝트와 이 프로젝트에서 사용된 Third-Party의 라이센스 사항은 [LICENSE.md](/LICENSE.md)를 참고해주세요.
+
+## Third-Party
+이 프로젝트에 사용 된 Third-Party에 대한 개별 라이센스는 [Third-Party.md](/.github/docs/Third-Party.md)와 [package.json](/package.json)을 참고해주세요.
+일부 Third-Party는 상업용 라이센스를 사용하고 있으므로 주의가 필요합니다.
 
 ## Documentation
 - [API 문서](https://dochis2013.gitbook.io/afreehp-api/)

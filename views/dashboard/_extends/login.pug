@@ -1,0 +1,44 @@
+doctype html
+head
+
+  meta(charset='utf-8')
+  meta(content='width=device-width, initial-scale=1.0' name='viewport')
+
+  title=head.title
+  meta(name='description' content=head.description)
+  meta(name='keywords' content=head.keywords)
+
+  // Favicon
+  link(rel='shortcut icon' href='/assets/dashboard/img/favicon/favicon.ico' type='image/x-icon')
+
+  // Fonts
+  link(rel='stylesheet' href='/assets/dashboard/font/pretendard-subset.css')
+
+  // Icons
+  link(rel='stylesheet' href='/assets/dashboard/vendor/fonts/boxicons.css')
+
+  // Core Css
+  link(rel='stylesheet' href='/assets/dashboard/vendor/css/rtl/core.css')
+  link(rel='stylesheet' href='/assets/dashboard/vendor/css/rtl/theme-default.css')
+  link(rel='stylesheet' href='/assets/dashboard/css/demo.css')
+  link(rel='stylesheet' href='/assets/dashboard/css/style.css')
+
+  // Vendor Css
+  link(rel='stylesheet' href='/assets/dashboard/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')
+
+  // Helpers
+  script(src='/assets/dashboard/vendor/js/helpers.js')
+
+  // add
+  block addHead
+body
+  div.container-xxl
+    block content
+
+script(src='/assets/dashboard/vendor/libs/jquery/jquery.js')
+script(src='/assets/dashboard/vendor/libs/popper/popper.js')
+script(src='/assets/dashboard/vendor/js/bootstrap.js')
+script(src='/assets/dashboard/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')
+script(src='/assets/dashboard/vendor/libs/hammer/hammer.js')
+script(src='/assets/dashboard/vendor/js/menu.js')
+block addScript
