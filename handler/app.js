@@ -1,11 +1,13 @@
 const serverless = require("serverless-http");
 const express = require("express");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const app = express();
 const path = require("path");
 
 // static 파일 라우팅 (실 서비스에서는 cloudfront를 통해 static 파일이 제공됨)
 // 이 설정은 로컬환경을 위해 추가된 것임
-app.use(express.static("public"));
+app.use(express.static("public", { etag: false }));
 
 // app settings
 app.set("view engine", "pug");
@@ -17,9 +19,14 @@ app.get("/", function (req, res) {
 });
 
 // dashboard 경로 라우팅
-app.get("/dashboard/*", require("../routes/app/dashboard"));
+app.get("/dashboard", cookieParser(), require("../routes/app/dashboard"));
+app.get("/dashboard/*", cookieParser(), require("../routes/app/dashboard"));
 
-// 아프리카 도우미에서 사용하는 라우팅
+// api 경로 라우팅
+const serviceApi = require("../routes/app/service/api");
+app.post("/service/api/start", bodyParser.json(), serviceApi.start);
+
+// 아프리카 도우미에서 사용하는 프록시 라우팅
 const afreehp = require("../routes/app/afreehp");
 app.all("/save/*", afreehp);
 app.all("/voice/*", afreehp);

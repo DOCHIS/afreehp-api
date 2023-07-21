@@ -13,7 +13,7 @@ MIT 라이선스
 이 프로젝트는 아프리카도우미를 기반으로 동작하며 아프리카도우미 및 아프리카TV의 공식 API가 아닙니다. 따라서 이 프로젝트를 사용함으로써 발생하는 모든 법적 책임은 사용자에게 있습니다.
 
 # public 경로에 포함된 라이센스
-## public/landing
+## public/assets/landing
   - [FlexStart](https://bootstrapmade.com/flexstart-bootstrap-startup-template/) - Bootstrap Startup Template [[일부 라이센스 무료]](https://bootstrapmade.com/license/)
     - [aos](https://michalsnik.github.io/aos/) - 스크롤 애니메이션 라이브러리 [MIT]
     - [bootstrap](https://getbootstrap.com/) - CSS 프레임워크 [MIT]
@@ -26,8 +26,8 @@ MIT 라이선스
   - [jquery](https://jquery.com/) - 자바스크립트 라이브러리 [MIT]
   - [Pretendard](https://cactus.tistory.com/306) - system-ui를 대체하는 글꼴 [SIL 오픈 폰트 라이선스]
 
-## public/dashboard
-  - public/dashboard에 포함된 정적 파일 일부는 상업용 라이센스가 필요하며, 라이센스 없이 사용하시면 법적인 문제가 발생할 수 있습니다.
+## public/assets/dashboard
+  - 이 디렉토리에 포함된 정적 파일 일부는 상업용 라이센스가 필요하며, 라이센스 없이 사용하시면 법적인 문제가 발생할 수 있습니다.
   - [Sneat – Bootstrap 5 HTML Admin Template](https://themeselection.com/item/sneat-bootstrap-html-admin-template/) - Bootstrap 5 HTML Admin Template [[상업용 라이센스]](https://themeselection.com/license/)
 
 # 그 이외의 라이센스

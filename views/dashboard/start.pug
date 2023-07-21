@@ -43,17 +43,18 @@ block content
           h4.mb-2 환영합니다 👋
           p.mb-4 API 사용을 위해 아프리카도우미의 후원 위젯 주소를 입력해주세요
 
-          form#formAuthentication.mb-3(method='POST')
+          form#startForm.mb-3(method='POST' action='/service/api/start')
             div.mb-3
-              label(for='email' class='form-label') 후원 위젯 주소
+              label(for='widgetUrl' class='form-label') 후원 위젯 주소
               input(type="text"
                 class="form-control"
-                id="email"
-                name="email-username"
+                id="widgetUrl"
+                name="widgetUrl"
                 placeholder="후원 위젯 주소를 입력해주세요 (ex. http://afreehp.kr/page/xxxxxxx)"
                 autofocus) 
+              div.invalid-feedback(style='display: none')
             p
-              a(href="/dashboard/assets/help/hint.png" target="_blank")
+              a(href="/assets/common/help/hint.png" target="_blank")
                 i.bx.bx-info-circle.me-1
                 span 이 주소를 어디서 알 수 있나요?
             
