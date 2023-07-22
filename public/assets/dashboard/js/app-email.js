@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
       emailCompose = document.querySelector('.app-email-compose'),
       emailListDelete = document.querySelector('.email-list-delete'),
       emailListRead = document.querySelector('.email-list-read'),
+      emailListEmpty = document.querySelector('.email-list-empty'),
       refreshEmails = document.querySelector('.email-refresh'),
       emailViewContainer = document.getElementById('app-email-view'),
       emailFilterFolderLists = [].slice.call(document.querySelectorAll('.email-filter-folders li')),
@@ -226,6 +227,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         selectAllEmails.indeterminate = false;
         selectAllEmails.checked = false;
+        var emailListItem = document.querySelectorAll('.email-list-item');
+        if (emailListItem.length == 0) {
+          emailListEmpty.classList.remove('d-none');
+        }
       });
     }
 
@@ -307,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
           let $avatar =
             "<div class='d-flex flex-wrap align-items-center'>" +
-            "<div class='avatar avatar-xs me-2'>" +
+            "<div class='avatar avatar-xs me-2 w-px-20 h-px-20'>" +
             "<img src='" +
             assetsPath +
             'img/avatars/' +
@@ -364,6 +369,10 @@ document.addEventListener('DOMContentLoaded', function () {
           let currentTarget = e.currentTarget;
           if (Helpers._hasClass('email-delete', currentTarget)) {
             currentTarget.parentNode.closest('li.email-list-item').remove();
+            var emailListItem = document.querySelectorAll('.email-list-item');
+            if (emailListItem.length == 0) {
+              emailListEmpty.classList.remove('d-none');
+            }
           } else if (Helpers._hasClass('email-read', currentTarget)) {
             currentTarget.parentNode.closest('li.email-list-item').classList.add('email-marked-read');
             Helpers._toggleClass(currentTarget, 'email-read', 'email-unread');

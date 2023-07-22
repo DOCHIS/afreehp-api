@@ -1775,6 +1775,13 @@
   background-image: url(../fonts/flags/1x1/ac.svg);
 }
 
+.fi-cefta {
+  background-image: url(../fonts/flags/4x3/cefta.svg);
+}
+.fi-cefta.fis {
+  background-image: url(../fonts/flags/1x1/cefta.svg);
+}
+
 .fi-cp {
   background-image: url(../fonts/flags/4x3/cp.svg);
 }
@@ -1808,6 +1815,13 @@
 }
 .fi-es-ga.fis {
   background-image: url(../fonts/flags/1x1/es-ga.svg);
+}
+
+.fi-es-pv {
+  background-image: url(../fonts/flags/4x3/es-pv.svg);
+}
+.fi-es-pv.fis {
+  background-image: url(../fonts/flags/1x1/es-pv.svg);
 }
 
 .fi-eu {

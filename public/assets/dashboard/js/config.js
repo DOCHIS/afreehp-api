@@ -75,14 +75,15 @@ TemplateCustomizer.LANGUAGES.fr = { ... };
  * themesPath: Theme CSS file path
  * displayCustomizer: true(Show customizer), false(Hide customizer)
  * lang: To set default language, Add more langues and set default. Fallback language is 'en'
- * controls: [ 'rtl','style','layoutType','showDropdownOnHover','layoutNavbarFixed','layoutFooterFixed','themes'] | Show/Hide customizer controls
+ * controls: [ 'rtl', 'style', 'headerType', 'contentLayout', 'layoutCollapsed', 'layoutNavbarOptions', 'themes' ] | Show/Hide customizer controls
  * defaultTheme: 0(Default), 1(Semi Dark), 2(Bordered)
- * defaultStyle: 'light', 'dark' (Mode)
+ * defaultStyle: 'light', 'dark', 'system' (Mode)
  * defaultTextDir: 'ltr', 'rtl' (rtlSupport must be true for rtl mode)
- * defaultLayoutType: 'static', 'fixed'
- * defaultMenuCollapsed: true, false
- * defaultNavbarFixed: true, false
- * defaultFooterFixed: true, false
+ * defaultContentLayout: 'compact', 'wide' (compact=container-xxl, wide=container-fluid)
+ * defaultHeaderType: 'static', 'fixed' (for horizontal layout only)
+ * defaultMenuCollapsed: true, false (For vertical layout only)
+ * defaultNavbarType: 'sticky', 'static', 'hidden'
+ * defaultFooterFixed: true, false (For vertical layout only)
  * defaultShowDropdownOnHover : true, false (for horizontal layout only)
  */
 
@@ -93,21 +94,14 @@ if (typeof TemplateCustomizer !== 'undefined') {
     displayCustomizer: true,
     // lang: 'fr',
     // defaultTheme: 2,
-    // defaultStyle: 'light',
-    // defaultTextDir: 'ltr',
-    // defaultLayoutType: 'fixed',
+    // defaultStyle: 'system',
+    // defaultTextDir: 'rtl',
+    // defaultContentLayout: 'wide',
+    // defaultHeaderType: 'static',
     // defaultMenuCollapsed: true,
-    // defaultNavbarFixed: true,
-    // defaultFooterFixed: false
-    defaultShowDropdownOnHover: true
-    // controls: [
-    //   'rtl',
-    //   'style',
-    //   'layoutType',
-    //   'showDropdownOnHover',
-    //   'layoutNavbarFixed',
-    //   'layoutFooterFixed',
-    //   'themes'
-    // ],
+    // defaultNavbarType: 'sticky',
+    // defaultFooterFixed: false,
+    // defaultShowDropdownOnHover: false,
+    controls: ['rtl', 'style', 'headerType', 'contentLayout', 'layoutCollapsed', 'layoutNavbarOptions', 'themes']
   });
 }

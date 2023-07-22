@@ -84,7 +84,7 @@ $(function () {
     msg += '<br /><br /><button type="button" class="btn btn-secondary clear">Yes</button>';
     return msg;
   };
-  $('#closeButton').click(function () {
+  $('#closeButton').on('click', function () {
     if ($(this).is(':checked')) {
       $('#addBehaviorOnToastCloseClick').prop('disabled', false);
     } else {
@@ -92,7 +92,7 @@ $(function () {
       $('#addBehaviorOnToastCloseClick').prop('checked', false);
     }
   });
-  $('#showtoast').click(function () {
+  $('#showtoast').on('click', function () {
     var shortCutFunction = $('#toastTypeGroup input:radio:checked').val(),
       isRtl = $('html').attr('dir') === 'rtl',
       msg = $('#message').val(),
@@ -200,10 +200,10 @@ $(function () {
   function getLastToast() {
     return $toastlast;
   }
-  $('#clearlasttoast').click(function () {
+  $('#clearlasttoast').on('click', function () {
     toastr.clear(getLastToast());
   });
-  $('#cleartoasts').click(function () {
+  $('#cleartoasts').on('click', function () {
     toastr.clear();
   });
 });

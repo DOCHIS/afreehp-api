@@ -401,7 +401,7 @@
               offsetY: 15,
               color: legendColor,
               fontSize: '15px',
-              fontWeight: '600',
+              fontWeight: '500',
               fontFamily: 'Public Sans'
             },
             value: {
@@ -607,7 +607,7 @@
       colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
       stroke: {
         width: 5,
-        colors: cardColor
+        colors: [cardColor]
       },
       dataLabels: {
         enabled: false,
@@ -623,6 +623,14 @@
           top: 0,
           bottom: 0,
           right: 15
+        }
+      },
+      states: {
+        hover: {
+          filter: { type: 'none' }
+        },
+        active: {
+          filter: { type: 'none' }
         }
       },
       plotOptions: {

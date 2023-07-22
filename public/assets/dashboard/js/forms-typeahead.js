@@ -174,7 +174,7 @@ $(function () {
         '</div>'
       ].join('\n'),
       suggestion: function (data) {
-        return '<div><strong>' + data.value + '</strong> – ' + data.year + '</div>';
+        return '<div><span class="fw-medium">' + data.value + '</span> – ' + data.year + '</div>';
       }
     }
   });

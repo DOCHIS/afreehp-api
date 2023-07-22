@@ -97,7 +97,7 @@
         plLastName: {
           validators: {
             notEmpty: {
-              message: 'Please enter your first name'
+              message: 'Please enter your last name'
             }
           }
         }

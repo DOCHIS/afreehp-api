@@ -476,7 +476,7 @@
     leadsReportChartConfig = {
       chart: {
         height: 157,
-        width: 130,
+        width: 135,
         parentHeightOffset: 0,
         type: 'donut'
       },
@@ -505,8 +505,8 @@
       },
       grid: {
         padding: {
-          top: -5,
-          bottom: -13
+          top: 5,
+          bottom: 5
         }
       },
       plotOptions: {

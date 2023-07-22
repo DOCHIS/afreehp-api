@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
       fcSidebarToggleButton.setAttribute('data-bs-toggle', 'sidebar');
       fcSidebarToggleButton.setAttribute('data-overlay', '');
       fcSidebarToggleButton.setAttribute('data-target', '#app-calendar-sidebar');
-      fcSidebarToggleButton.insertAdjacentHTML('beforeend', '<i class="bx bx-menu bx-sm text-body"></i>');
+      fcSidebarToggleButton.insertAdjacentHTML('beforeend', '<i class="bx bx-menu bx-sm text-heading"></i>');
     }
 
     // Filter events by calender

@@ -130,6 +130,9 @@ html:not([dir=rtl]) .datepicker .prev::after {
 .datepicker table tr td.range {
   border-radius: 0 !important;
 }
+.datepicker table tr td.range.today {
+  box-shadow: none !important;
+}
 html:not([dir=rtl]) .datepicker table tr td.range-start:not(.range-end) {
   border-bottom-right-radius: 0 !important;
   border-top-right-radius: 0 !important;
@@ -154,8 +157,8 @@ html:not([dir=rtl]) .datepicker table tr td.range-end:not(.range-start) {
   display: block;
   float: left;
   width: 3.375rem;
-  height: 3.375rem;
-  line-height: 3.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
   cursor: pointer;
 }
 .datepicker table tr td span.disabled, .datepicker table tr td span.disabled:hover {

@@ -19,20 +19,27 @@
   }
 
   // Radial bar chart functions
-  function radialBarChart(color, value) {
+  function radialBarChart(color, value, show) {
     const radialBarChartOpt = {
       chart: {
-        height: 55,
-        width: 45,
+        height: show == 'true' ? 58 : 55,
+        width: show == 'true' ? 58 : 45,
         type: 'radialBar'
       },
       plotOptions: {
         radialBar: {
           hollow: {
-            size: '25%'
+            size: show == 'true' ? '50%' : '25%'
           },
           dataLabels: {
-            show: false
+            show: show == 'true' ? true : false,
+            value: {
+              offsetY: -10,
+              fontSize: '15px',
+              fontWeight: 500,
+              fontFamily: 'Public Sans',
+              color: headingColor
+            }
           },
           track: {
             background: config.colors_label.secondary
@@ -42,14 +49,14 @@
       colors: [color],
       grid: {
         padding: {
-          top: -15,
-          bottom: -15,
-          left: -5,
+          top: show == 'true' ? -12 : -15,
+          bottom: show == 'true' ? -17 : -15,
+          left: show == 'true' ? -17 : -5,
           right: -15
         }
       },
       series: [value],
-      labels: ['Progress']
+      labels: show == 'true' ? [''] : ['Progress']
     };
     return radialBarChartOpt;
   }
@@ -62,7 +69,10 @@
     chartProgressList.forEach(function (chartProgressEl) {
       const color = config.colors[chartProgressEl.dataset.color],
         series = chartProgressEl.dataset.series;
-      const optionsBundle = radialBarChart(color, series);
+      const progress_variant = chartProgressEl.dataset.progress_variant
+        ? chartProgressEl.dataset.progress_variant
+        : 'false';
+      const optionsBundle = radialBarChart(color, series, progress_variant);
       const chart = new ApexCharts(chartProgressEl, optionsBundle);
       chart.render();
     });
@@ -82,7 +92,7 @@
       colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
       stroke: {
         width: 5,
-        colors: cardColor
+        colors: [cardColor]
       },
       dataLabels: {
         enabled: false,

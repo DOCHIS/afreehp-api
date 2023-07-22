@@ -77,7 +77,7 @@ $(function () {
               '</div>' +
               '</div>' +
               '<div class="d-flex flex-column">' +
-              '<span class="text-truncate fw-bold">' +
+              '<span class="text-truncate fw-medium">' +
               $name +
               '</span>' +
               '<small class="text-truncate text-muted">' +

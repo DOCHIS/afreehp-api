@@ -201,7 +201,7 @@
         </div>`
           : ''
       }
-      <strong>${tagData.name}</strong>
+      <div class="fw-medium">${tagData.name}</div>
       <span>${tagData.email}</span>
     </div>
   `;

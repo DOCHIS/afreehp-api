@@ -330,7 +330,7 @@ html:not([dir=rtl]) .daterangepicker .drp-calendar.right {
   color: #697a8d;
 }
 .light-style .daterangepicker select.hourselect, .light-style .daterangepicker select.minuteselect, .light-style .daterangepicker select.secondselect, .light-style .daterangepicker select.ampmselect {
-  background: rgba(67, 89, 113, 0.1);
+  background: #eceef1;
   font-size: 0.75rem;
   color: #697a8d;
   border-radius: 0.25rem;

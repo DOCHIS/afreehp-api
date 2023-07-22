@@ -52,6 +52,9 @@
 .fc .fc-view-harness {
   min-height: 650px;
 }
+.fc .fc-day-today {
+  background-clip: padding-box;
+}
 .fc .fc-h-event .fc-event-main,
 .fc .fc-v-event .fc-event-main {
   color: inherit !important;
@@ -72,9 +75,12 @@
 }
 .fc .fc-view-harness .fc-event {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   padding: 0.25rem 0.5rem;
   border-radius: 3px;
+}
+.fc .fc-view-harness .fc-event .fc-event-title {
+  font-weight: 500;
 }
 .fc .fc-view-harness .fc-daygrid-event-harness .fc-event.private-event {
   background-color: transparent !important;

@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Create a div and add a class
         let renderMsg = document.createElement('div');
         renderMsg.className = 'chat-message-text mt-2';
-        renderMsg.innerHTML = '<p class="mb-0">' + messageInput.value + '</p>';
+        renderMsg.innerHTML = '<p class="mb-0 text-break">' + messageInput.value + '</p>';
         document.querySelector('li:last-child .chat-message-wrapper').appendChild(renderMsg);
         messageInput.value = '';
         scrollToBottom();

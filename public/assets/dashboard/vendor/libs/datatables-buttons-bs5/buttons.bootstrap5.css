@@ -524,6 +524,9 @@ div.dt-button-collection .dt-button:not(.dt-btn-split-drop) {
 .light-style .dt-button-collection .dropdown-item {
   padding: 0.532rem 1.25rem;
 }
+.light-style .dt-button-collection .dropdown-item:hover {
+  background-color: rgba(67, 89, 113, 0.04);
+}
 
 .dark-style div.dataTables_wrapper .dt-button-collection {
   background-color: #323249;
@@ -539,6 +542,9 @@ div.dt-button-collection .dt-button:not(.dt-btn-split-drop) {
 }
 .dark-style .dt-button-collection .dropdown-item {
   padding: 0.532rem 1.25rem;
+}
+.dark-style .dt-button-collection .dropdown-item:hover {
+  background-color: rgba(124, 125, 182, 0.1);
 }
 
 .dt-button-info {

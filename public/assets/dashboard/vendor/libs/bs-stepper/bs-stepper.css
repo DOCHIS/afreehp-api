@@ -186,7 +186,7 @@
   visibility: hidden;
 }
 
-/*# sourceMappingURL=bs-stepper.css.map */
+
 .bs-stepper {
   border-radius: 0.5rem;
 }
@@ -206,6 +206,7 @@
 .bs-stepper .bs-stepper-header .step .step-trigger {
   padding: 0 1rem;
   flex-wrap: nowrap;
+  font-weight: 500;
 }
 .bs-stepper .bs-stepper-header .step .step-trigger .bs-stepper-label {
   margin: 0;
@@ -214,12 +215,12 @@
   text-overflow: ellipsis;
   text-align: start;
   display: inline-grid;
-  font-weight: 600;
+  font-weight: 500;
 }
 .bs-stepper .bs-stepper-header .step .step-trigger .bs-stepper-label .bs-stepper-title {
   font-size: 0.9375rem;
   line-height: 1;
-  font-weight: 600;
+  font-weight: 500;
 }
 .bs-stepper .bs-stepper-header .step .step-trigger .bs-stepper-label .bs-stepper-subtitle {
   margin-top: 0.2rem;
@@ -300,7 +301,7 @@ html:not([dir=rtl]) .bs-stepper .bs-stepper-header .step:last-child .step-trigge
   font-weight: normal;
 }
 .bs-stepper.wizard-icons .bs-stepper-header .step.active .bs-stepper-label {
-  font-weight: 600;
+  font-weight: 500;
 }
 .bs-stepper.wizard-modern .bs-stepper-header {
   border-bottom: none !important;
@@ -438,6 +439,8 @@ html:not([dir=rtl]).dark-style .bs-stepper.vertical .bs-stepper-header {
 [dir=rtl] .bs-stepper .bs-stepper-content .btn-next i,
 [dir=rtl] .bs-stepper .bs-stepper-content .btn-prev i {
   transform: rotate(180deg);
+  line-height: 1.05;
+  margin-bottom: 1.5px;
 }
 [dir=rtl] .bs-stepper.wizard-modern.vertical .bs-stepper-header {
   border-left: none !important;

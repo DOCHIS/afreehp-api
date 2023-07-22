@@ -43,6 +43,11 @@
   overflow: hidden;
 }
 
+.jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group,
+.jq-ry-container > .jq-ry-group-wrapper > .jq-ry-group.jq-ry-rated-group {
+  z-index: 8;
+}
+
 .light-style:not([dir=rtl]) .jq-ry-container .jq-ry-normal-group svg {
   fill: rgba(67, 89, 113, 0.2);
 }

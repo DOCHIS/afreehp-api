@@ -1206,7 +1206,7 @@
       series: [78],
       labels: ['Out of 100'],
       chart: {
-        height: 195,
+        height: 300,
         type: 'radialBar'
       },
       plotOptions: {
@@ -1546,7 +1546,7 @@
               offsetY: 15,
               color: legendColor,
               fontSize: '15px',
-              fontWeight: '600',
+              fontWeight: '500',
               fontFamily: 'Public Sans'
             },
             value: {
@@ -1597,5 +1597,123 @@
   if (typeof growthChartEl !== undefined && growthChartEl !== null) {
     const growthChart = new ApexCharts(growthChartEl, growthChartOptions);
     growthChart.render();
+  }
+  // datatbale horizontalBar chart
+
+  const horizontalBarChartEl = document.querySelector('#horizontalBarChart'),
+    horizontalBarChartConfig = {
+      chart: {
+        height: 270,
+        type: 'bar',
+        toolbar: {
+          show: false
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          barHeight: '70%',
+          distributed: true,
+          startingShape: 'rounded',
+          borderRadius: 7
+        }
+      },
+      grid: {
+        strokeDashArray: 10,
+        borderColor: borderColor,
+        xaxis: {
+          lines: {
+            show: true
+          }
+        },
+        yaxis: {
+          lines: {
+            show: false
+          }
+        },
+        padding: {
+          top: -35,
+          bottom: -12
+        }
+      },
+
+      colors: [
+        config.colors.primary,
+        config.colors.info,
+        config.colors.success,
+        config.colors.secondary,
+        config.colors.danger,
+        config.colors.warning
+      ],
+      dataLabels: {
+        enabled: true,
+        style: {
+          colors: ['#fff'],
+          fontWeight: 200,
+          fontSize: '13px',
+          fontFamily: 'Public Sans'
+        },
+        formatter: function (val, opts) {
+          return horizontalBarChartConfig.labels[opts.dataPointIndex];
+        },
+        offsetX: 0,
+        dropShadow: {
+          enabled: false
+        }
+      },
+      labels: ['UI Design', 'UX Design', 'Music', 'Animation', 'React', 'SEO'],
+      series: [
+        {
+          data: [35, 20, 14, 12, 10, 9]
+        }
+      ],
+
+      xaxis: {
+        categories: ['6', '5', '4', '3', '2', '1'],
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          style: {
+            colors: labelColor,
+            fontSize: '13px'
+          },
+          formatter: function (val) {
+            return `${val}%`;
+          }
+        }
+      },
+      yaxis: {
+        max: 35,
+        labels: {
+          style: {
+            colors: [labelColor],
+            fontFamily: 'Public Sans',
+            fontSize: '13px'
+          }
+        }
+      },
+      tooltip: {
+        enabled: true,
+        style: {
+          fontSize: '12px'
+        },
+        onDatasetHover: {
+          highlightDataSeries: false
+        },
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+          return '<div class="px-3 py-2">' + '<span>' + series[seriesIndex][dataPointIndex] + '%</span>' + '</div>';
+        }
+      },
+      legend: {
+        show: false
+      }
+    };
+  if (typeof horizontalBarChartEl !== undefined && horizontalBarChartEl !== null) {
+    const horizontalBarChart = new ApexCharts(horizontalBarChartEl, horizontalBarChartConfig);
+    horizontalBarChart.render();
   }
 })();

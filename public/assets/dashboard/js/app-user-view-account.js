@@ -68,7 +68,7 @@ $(function () {
               '</div>' +
               '</div>' +
               '<div class="d-flex flex-column">' +
-              '<span class="text-truncate fw-semibold">' +
+              '<span class="text-truncate fw-medium">' +
               $name +
               '</span>' +
               '<small class="text-muted">' +
@@ -209,7 +209,8 @@ $(function () {
           render: function (data, type, full, meta) {
             var $invoice_id = full['invoice_id'];
             // Creates full output for row
-            var $row_output = '<a href="app-invoice-preview.html">#' + $invoice_id + '</a>';
+            var $row_output =
+              '<a href="app-invoice-preview.html"><span class="fw-medium">#' + $invoice_id + '</span></a>';
             return $row_output;
           }
         },
@@ -235,9 +236,9 @@ $(function () {
             return (
               "<span data-bs-toggle='tooltip' data-bs-html='true' title='<span>" +
               $invoice_status +
-              '<br> <strong>Balance:</strong> ' +
+              '<br> <span class="fw-medium">Balance:</span> ' +
               $balance +
-              '<br> <strong>Due Date:</strong> ' +
+              '<br> <span class="fw-medium">Due Date:</span> ' +
               $due_date +
               "</span>'>" +
               roleBadgeObj[$invoice_status] +

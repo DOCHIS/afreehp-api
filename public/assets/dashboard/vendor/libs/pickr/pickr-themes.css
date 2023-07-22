@@ -351,7 +351,7 @@
   border-radius: 50em;
 }
 .pcr-app[data-theme=classic] .pcr-selection .pcr-color-chooser .pcr-slider {
-  background: linear-gradient(to bottom, hsl(0deg, 100%, 50%), hsl(60deg, 100%, 50%), hsl(120deg, 100%, 50%), hsl(180deg, 100%, 50%), hsl(240deg, 100%, 50%), hsl(300deg, 100%, 50%), hsl(0deg, 100%, 50%));
+  background: linear-gradient(to bottom, hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%), hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(0, 100%, 50%));
 }
 .pcr-app[data-theme=classic] .pcr-selection .pcr-color-opacity .pcr-slider {
   background: linear-gradient(to bottom, transparent, black), url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
@@ -725,7 +725,7 @@
   border-radius: 50em;
 }
 .pcr-app[data-theme=monolith] .pcr-selection .pcr-color-chooser .pcr-slider {
-  background: linear-gradient(to right, hsl(0deg, 100%, 50%), hsl(60deg, 100%, 50%), hsl(120deg, 100%, 50%), hsl(180deg, 100%, 50%), hsl(240deg, 100%, 50%), hsl(300deg, 100%, 50%), hsl(0deg, 100%, 50%));
+  background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%), hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(0, 100%, 50%));
 }
 .pcr-app[data-theme=monolith] .pcr-selection .pcr-color-opacity .pcr-slider {
   background: linear-gradient(to right, transparent, black), url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
@@ -1108,7 +1108,7 @@
   border-radius: 50em;
 }
 .pcr-app[data-theme=nano] .pcr-selection .pcr-color-chooser .pcr-slider {
-  background: linear-gradient(to right, hsl(0deg, 100%, 50%), hsl(60deg, 100%, 50%), hsl(120deg, 100%, 50%), hsl(180deg, 100%, 50%), hsl(240deg, 100%, 50%), hsl(300deg, 100%, 50%), hsl(0deg, 100%, 50%));
+  background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%), hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(0, 100%, 50%));
 }
 .pcr-app[data-theme=nano] .pcr-selection .pcr-color-opacity .pcr-slider {
   background: linear-gradient(to right, transparent, black), url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');

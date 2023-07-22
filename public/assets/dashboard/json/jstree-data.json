@@ -3,8 +3,14 @@
     "id": 1,
     "text": "css",
     "children": [
-      { "text": "app.css", "type": "css" },
-      { "text": "style.css", "type": "css" }
+      {
+        "text": "app.css",
+        "type": "css"
+      },
+      {
+        "text": "style.css",
+        "type": "css"
+      }
     ]
   },
   {
@@ -14,9 +20,18 @@
       "opened": true
     },
     "children": [
-      { "text": "bg.jpg", "type": "img" },
-      { "text": "logo.png", "type": "img" },
-      { "text": "avatar.png", "type": "img" }
+      {
+        "text": "bg.jpg",
+        "type": "img"
+      },
+      {
+        "text": "logo.png",
+        "type": "img"
+      },
+      {
+        "text": "avatar.png",
+        "type": "img"
+      }
     ]
   },
   {
@@ -26,11 +41,26 @@
       "opened": true
     },
     "children": [
-      { "text": "jquery.js", "type": "js" },
-      { "text": "app.js", "type": "js" }
+      {
+        "text": "jquery.js",
+        "type": "js"
+      },
+      {
+        "text": "app.js",
+        "type": "js"
+      }
     ]
   },
-  { "text": "index.html", "type": "html" },
-  { "text": "page-one.html", "type": "html" },
-  { "text": "page-two.html", "type": "html" }
+  {
+    "text": "index.html",
+    "type": "html"
+  },
+  {
+    "text": "page-one.html",
+    "type": "html"
+  },
+  {
+    "text": "page-two.html",
+    "type": "html"
+  }
 ]

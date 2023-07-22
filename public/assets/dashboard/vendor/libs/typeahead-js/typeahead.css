@@ -30,6 +30,9 @@
 .twitter-typeahead .tt-menu .tt-suggestion p {
   margin: 0;
 }
+.twitter-typeahead .tt-menu .tt-suggestion .tt-highlight {
+  font-weight: 500;
+}
 .twitter-typeahead .tt-hint {
   color: #999;
 }

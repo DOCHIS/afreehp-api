@@ -750,7 +750,7 @@
   content: "×";
   color: #ccc;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 500;
 }
 .ql-bubble.ql-container:not(.ql-disabled) a {
   white-space: nowrap;

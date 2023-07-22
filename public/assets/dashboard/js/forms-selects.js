@@ -36,7 +36,7 @@ $(function () {
       if (!option.id) {
         return option.text;
       }
-      var $icon = "<i class='bx bxl-" + $(option.element).data('icon') + " me-2'></i>" + option.text;
+      var $icon = "<i class='" + $(option.element).data('icon') + " me-2'></i>" + option.text;
 
       return $icon;
     }

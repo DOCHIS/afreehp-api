@@ -213,8 +213,8 @@ table.dataTable.table-bordered td.dtr-control.dtr-hidden + * {
 
 table.dataTable.dtr-column > tbody > tr > td.control:before,
 table.dataTable.dtr-column > tbody > tr > th.control:before {
-  line-height: 0.8em;
-  font-weight: bold;
+  line-height: 0.9em;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 1399.98px) {

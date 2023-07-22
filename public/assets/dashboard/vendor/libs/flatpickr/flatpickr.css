@@ -693,7 +693,7 @@ html:not([dir=rtl]) .flatpickr-weekwrapper .flatpickr-weeks .flatpickr-weeks {
 }
 .light-style .flatpickr-time .flatpickr-time-separator {
   color: #697a8d;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .dark-style .flatpickr-calendar,
@@ -767,7 +767,7 @@ html:not([dir=rtl]) .flatpickr-weekwrapper .flatpickr-weeks .flatpickr-weeks {
 }
 .dark-style .flatpickr-day {
   color: #a3a4cc;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 0.375rem;
 }
 .dark-style .flatpickr-day:hover, .dark-style .flatpickr-day:focus, .dark-style .flatpickr-day.nextMonthDay:hover, .dark-style .flatpickr-day.prevMonthDay:hover, .dark-style .flatpickr-day.today:hover, .dark-style .flatpickr-day.nextMonthDay:focus, .dark-style .flatpickr-day.prevMonthDay:focus, .dark-style .flatpickr-day.today:focus {
@@ -819,5 +819,5 @@ html:not([dir=rtl]) .flatpickr-weekwrapper .flatpickr-weeks .flatpickr-weeks {
 }
 .dark-style .flatpickr-time .flatpickr-time-separator {
   color: #a3a4cc;
-  font-weight: 600;
+  font-weight: 500;
 }

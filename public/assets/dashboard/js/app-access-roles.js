@@ -74,7 +74,7 @@ $(function () {
               '<div class="d-flex flex-column">' +
               '<a href="' +
               userView +
-              '" class="text-body text-truncate"><span class="fw-semibold">' +
+              '" class="text-body text-truncate"><span class="fw-medium">' +
               $name +
               '</span></a>' +
               '<small class="text-muted">@' +
@@ -111,7 +111,7 @@ $(function () {
           render: function (data, type, full, meta) {
             var $plan = full['current_plan'];
 
-            return '<span class="fw-semibold">' + $plan + '</span>';
+            return '<span class="fw-medium">' + $plan + '</span>';
           }
         },
         {

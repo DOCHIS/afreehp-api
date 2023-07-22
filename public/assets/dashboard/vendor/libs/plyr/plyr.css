@@ -73,7 +73,7 @@
 }
 
 .plyr__badge {
-  background: var(--plyr-badge-background, hsl(216deg, 15%, 34%));
+  background: var(--plyr-badge-background, hsl(216, 15%, 34%));
   border-radius: var(--plyr-badge-border-radius, 2px);
   color: var(--plyr-badge-text-color, #fff);
   font-size: var(--plyr-font-size-badge, 9px);
@@ -136,7 +136,7 @@
 .plyr__control {
   background: transparent;
   border: 0;
-  border-radius: var(--plyr-control-radius, 3px);
+  border-radius: var(--plyr-control-radius, 4px);
   color: inherit;
   cursor: pointer;
   flex-shrink: 0;
@@ -155,8 +155,8 @@
 .plyr__control:focus {
   outline: 0;
 }
-.plyr__control.plyr__tab-focus {
-  outline: var(--plyr-tab-focus-color, var(--plyr-color-main, var(--plyr-color-main, hsl(198deg, 100%, 50%)))) dotted 3px;
+.plyr__control:focus-visible {
+  outline: 2px dashed var(--plyr-focus-visible-color, var(--plyr-color-main, var(--plyr-color-main, hsl(198, 100%, 50%))));
   outline-offset: 2px;
 }
 
@@ -238,10 +238,10 @@ a.plyr__control::after, a.plyr__control::before {
 .plyr__menu__container {
   animation: plyr-popup 0.2s ease;
   background: var(--plyr-menu-background, rgba(255, 255, 255, 0.9));
-  border-radius: var(--plyr-menu-radius, 4px);
+  border-radius: var(--plyr-menu-radius, 8px);
   bottom: 100%;
   box-shadow: var(--plyr-menu-shadow, 0 1px 2px rgba(0, 0, 0, 0.15));
-  color: var(--plyr-menu-color, hsl(216deg, 15%, 34%));
+  color: var(--plyr-menu-color, hsl(216, 15%, 34%));
   font-size: var(--plyr-font-size-base, 15px);
   margin-bottom: 10px;
   position: absolute;
@@ -277,7 +277,7 @@ a.plyr__control::after, a.plyr__control::before {
 }
 .plyr__menu__container .plyr__control {
   align-items: center;
-  color: var(--plyr-menu-color, hsl(216deg, 15%, 34%));
+  color: var(--plyr-menu-color, hsl(216, 15%, 34%));
   display: flex;
   font-size: var(--plyr-font-size-menu, var(--plyr-font-size-small, 13px));
   padding: calc(calc(var(--plyr-control-spacing, 10px) * 0.7) / 1.5) calc(calc(var(--plyr-control-spacing, 10px) * 0.7) * 1.5);
@@ -300,10 +300,10 @@ a.plyr__control::after, a.plyr__control::before {
   padding-right: calc(calc(var(--plyr-control-spacing, 10px) * 0.7) * 4);
 }
 .plyr__menu__container .plyr__control--forward::after {
-  border-left-color: var(--plyr-menu-arrow-color, hsl(216deg, 15%, 52%));
+  border-left-color: var(--plyr-menu-arrow-color, hsl(216, 15%, 52%));
   right: calc((calc(var(--plyr-control-spacing, 10px) * 0.7) * 1.5) - var(--plyr-menu-item-arrow-size, 4px));
 }
-.plyr__menu__container .plyr__control--forward.plyr__tab-focus::after, .plyr__menu__container .plyr__control--forward:hover::after {
+.plyr__menu__container .plyr__control--forward:focus-visible::after, .plyr__menu__container .plyr__control--forward:hover::after {
   border-left-color: currentColor;
 }
 .plyr__menu__container .plyr__control--back {
@@ -315,11 +315,11 @@ a.plyr__control::after, a.plyr__control::before {
   width: calc(100% - (calc(var(--plyr-control-spacing, 10px) * 0.7) * 2));
 }
 .plyr__menu__container .plyr__control--back::after {
-  border-right-color: var(--plyr-menu-arrow-color, hsl(216deg, 15%, 52%));
+  border-right-color: var(--plyr-menu-arrow-color, hsl(216, 15%, 52%));
   left: calc((calc(var(--plyr-control-spacing, 10px) * 0.7) * 1.5) - var(--plyr-menu-item-arrow-size, 4px));
 }
 .plyr__menu__container .plyr__control--back::before {
-  background: var(--plyr-menu-back-border-color, hsl(216deg, 15%, 88%));
+  background: var(--plyr-menu-back-border-color, hsl(216, 15%, 88%));
   box-shadow: 0 1px 0 var(--plyr-menu-back-border-shadow-color, #fff);
   content: "";
   height: 1px;
@@ -330,7 +330,7 @@ a.plyr__control::after, a.plyr__control::before {
   right: 0;
   top: 100%;
 }
-.plyr__menu__container .plyr__control--back.plyr__tab-focus::after, .plyr__menu__container .plyr__control--back:hover::after {
+.plyr__menu__container .plyr__control--back:focus-visible::after, .plyr__menu__container .plyr__control--back:hover::after {
   border-right-color: currentColor;
 }
 .plyr__menu__container .plyr__control[role=menuitemradio] {
@@ -361,13 +361,13 @@ a.plyr__control::after, a.plyr__control::before {
   width: 6px;
 }
 .plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::before {
-  background: var(--plyr-control-toggle-checked-background, var(--plyr-color-main, var(--plyr-color-main, hsl(198deg, 100%, 50%))));
+  background: var(--plyr-control-toggle-checked-background, var(--plyr-color-main, var(--plyr-color-main, hsl(198, 100%, 50%))));
 }
 .plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::after {
   opacity: 1;
   transform: translateY(-50%) scale(1);
 }
-.plyr__menu__container .plyr__control[role=menuitemradio].plyr__tab-focus::before, .plyr__menu__container .plyr__control[role=menuitemradio]:hover::before {
+.plyr__menu__container .plyr__control[role=menuitemradio]:focus-visible::before, .plyr__menu__container .plyr__control[role=menuitemradio]:hover::before {
   background: rgba(35, 40, 47, 0.1);
 }
 .plyr__menu__container .plyr__menu__value {
@@ -385,7 +385,7 @@ a.plyr__control::after, a.plyr__control::before {
   background: transparent;
   border: 0;
   border-radius: calc(var(--plyr-range-thumb-height, 13px) * 2);
-  color: var(--plyr-range-fill-background, var(--plyr-color-main, var(--plyr-color-main, hsl(198deg, 100%, 50%))));
+  color: var(--plyr-range-fill-background, var(--plyr-color-main, var(--plyr-color-main, hsl(198, 100%, 50%))));
   display: block;
   height: calc((var(--plyr-range-thumb-active-shadow-width, 3px) * 2) + var(--plyr-range-thumb-height, 13px));
   margin: 0;
@@ -484,16 +484,16 @@ a.plyr__control::after, a.plyr__control::before {
 .plyr--full-ui input[type=range]:focus {
   outline: 0;
 }
-.plyr--full-ui input[type=range].plyr__tab-focus::-webkit-slider-runnable-track {
-  outline: var(--plyr-tab-focus-color, var(--plyr-color-main, var(--plyr-color-main, hsl(198deg, 100%, 50%)))) dotted 3px;
+.plyr--full-ui input[type=range]:focus-visible::-webkit-slider-runnable-track {
+  outline: 2px dashed var(--plyr-focus-visible-color, var(--plyr-color-main, var(--plyr-color-main, hsl(198, 100%, 50%))));
   outline-offset: 2px;
 }
-.plyr--full-ui input[type=range].plyr__tab-focus::-moz-range-track {
-  outline: var(--plyr-tab-focus-color, var(--plyr-color-main, var(--plyr-color-main, hsl(198deg, 100%, 50%)))) dotted 3px;
+.plyr--full-ui input[type=range]:focus-visible::-moz-range-track {
+  outline: 2px dashed var(--plyr-focus-visible-color, var(--plyr-color-main, var(--plyr-color-main, hsl(198, 100%, 50%))));
   outline-offset: 2px;
 }
-.plyr--full-ui input[type=range].plyr__tab-focus::-ms-track {
-  outline: var(--plyr-tab-focus-color, var(--plyr-color-main, var(--plyr-color-main, hsl(198deg, 100%, 50%)))) dotted 3px;
+.plyr--full-ui input[type=range]:focus-visible::-ms-track {
+  outline: 2px dashed var(--plyr-focus-visible-color, var(--plyr-color-main, var(--plyr-color-main, hsl(198, 100%, 50%))));
   outline-offset: 2px;
 }
 
@@ -536,11 +536,11 @@ a.plyr__control::after, a.plyr__control::before {
 
 /* stylelint-disable selector-max-compound-selectors */
 .plyr__tooltip {
-  background: var(--plyr-tooltip-background, rgba(255, 255, 255, 0.9));
+  background: var(--plyr-tooltip-background, #fff);
   border-radius: var(--plyr-tooltip-radius, 5px);
   bottom: 100%;
   box-shadow: var(--plyr-tooltip-shadow, 0 1px 2px rgba(0, 0, 0, 0.15));
-  color: var(--plyr-tooltip-color, hsl(216deg, 15%, 34%));
+  color: var(--plyr-tooltip-color, hsl(216, 15%, 34%));
   font-size: var(--plyr-font-size-small, 13px);
   font-weight: var(--plyr-font-weight-regular, 400);
   left: 50%;
@@ -559,7 +559,7 @@ a.plyr__control::after, a.plyr__control::before {
 .plyr__tooltip::before {
   border-left: var(--plyr-tooltip-arrow-size, 4px) solid transparent;
   border-right: var(--plyr-tooltip-arrow-size, 4px) solid transparent;
-  border-top: var(--plyr-tooltip-arrow-size, 4px) solid var(--plyr-tooltip-background, rgba(255, 255, 255, 0.9));
+  border-top: var(--plyr-tooltip-arrow-size, 4px) solid var(--plyr-tooltip-background, #fff);
   bottom: calc(var(--plyr-tooltip-arrow-size, 4px) * -1);
   content: "";
   height: 0;
@@ -571,7 +571,7 @@ a.plyr__control::after, a.plyr__control::before {
 }
 
 .plyr .plyr__control:hover .plyr__tooltip,
-.plyr .plyr__control.plyr__tab-focus .plyr__tooltip,
+.plyr .plyr__control:focus-visible .plyr__tooltip,
 .plyr__tooltip--visible {
   opacity: 1;
   transform: translate(-50%, 0) scale(1);
@@ -604,13 +604,13 @@ a.plyr__control::after, a.plyr__control::before {
   transform: translateX(50%);
 }
 
-.plyr__controls > .plyr__control:first-child:hover .plyr__tooltip, .plyr__controls > .plyr__control:first-child.plyr__tab-focus .plyr__tooltip,
+.plyr__controls > .plyr__control:first-child:hover .plyr__tooltip, .plyr__controls > .plyr__control:first-child:focus-visible .plyr__tooltip,
 .plyr__controls > .plyr__control:first-child .plyr__tooltip--visible,
 .plyr__controls > .plyr__control:first-child + .plyr__control:hover .plyr__tooltip,
-.plyr__controls > .plyr__control:first-child + .plyr__control.plyr__tab-focus .plyr__tooltip,
+.plyr__controls > .plyr__control:first-child + .plyr__control:focus-visible .plyr__tooltip,
 .plyr__controls > .plyr__control:first-child + .plyr__control .plyr__tooltip--visible,
 .plyr__controls > .plyr__control:last-child:hover .plyr__tooltip,
-.plyr__controls > .plyr__control:last-child.plyr__tab-focus .plyr__tooltip,
+.plyr__controls > .plyr__control:last-child:focus-visible .plyr__tooltip,
 .plyr__controls > .plyr__control:last-child .plyr__tooltip--visible {
   transform: translate(0, 0) scale(1);
 }
@@ -697,21 +697,15 @@ a.plyr__control::after, a.plyr__control::before {
 .plyr__volume {
   align-items: center;
   display: flex;
-  max-width: 110px;
-  min-width: 80px;
   position: relative;
-  width: 20%;
 }
 .plyr__volume input[type=range] {
   margin-left: calc(var(--plyr-control-spacing, 10px) / 2);
   margin-right: calc(var(--plyr-control-spacing, 10px) / 2);
+  max-width: 90px;
+  min-width: 60px;
   position: relative;
   z-index: 2;
-}
-
-.plyr--is-ios .plyr__volume {
-  min-width: 0;
-  width: auto;
 }
 
 .plyr--audio {
@@ -721,12 +715,12 @@ a.plyr__control::after, a.plyr__control::before {
 .plyr--audio .plyr__controls {
   background: var(--plyr-audio-controls-background, #fff);
   border-radius: inherit;
-  color: var(--plyr-audio-control-color, hsl(216deg, 15%, 34%));
+  color: var(--plyr-audio-control-color, hsl(216, 15%, 34%));
   padding: var(--plyr-control-spacing, 10px);
 }
 
-.plyr--audio .plyr__control.plyr__tab-focus, .plyr--audio .plyr__control:hover, .plyr--audio .plyr__control[aria-expanded=true] {
-  background: var(--plyr-audio-control-background-hover, var(--plyr-color-main, var(--plyr-color-main, hsl(198deg, 100%, 50%))));
+.plyr--audio .plyr__control:focus-visible, .plyr--audio .plyr__control:hover, .plyr--audio .plyr__control[aria-expanded=true] {
+  background: var(--plyr-audio-control-background-hover, var(--plyr-color-main, var(--plyr-color-main, hsl(198, 100%, 50%))));
   color: var(--plyr-audio-control-color-hover, #fff);
 }
 
@@ -754,7 +748,6 @@ a.plyr__control::after, a.plyr__control::before {
 }
 
 .plyr--video {
-  background: var(--plyr-video-background, var(--plyr-video-background, rgb(0, 0, 0)));
   overflow: hidden;
 }
 .plyr--video.plyr--menu-open {
@@ -763,6 +756,7 @@ a.plyr__control::after, a.plyr__control::before {
 
 .plyr__video-wrapper {
   background: var(--plyr-video-background, var(--plyr-video-background, rgb(0, 0, 0)));
+  border-radius: inherit;
   height: 100%;
   margin: auto;
   overflow: hidden;
@@ -826,13 +820,13 @@ a.plyr__control::after, a.plyr__control::before {
   transform: translateY(100%);
 }
 
-.plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
-  background: var(--plyr-video-control-background-hover, var(--plyr-color-main, var(--plyr-color-main, hsl(198deg, 100%, 50%))));
+.plyr--video .plyr__control:focus-visible, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
+  background: var(--plyr-video-control-background-hover, var(--plyr-color-main, var(--plyr-color-main, hsl(198, 100%, 50%))));
   color: var(--plyr-video-control-color-hover, #fff);
 }
 
 .plyr__control--overlaid {
-  background: var(--plyr-video-control-background-hover, var(--plyr-color-main, var(--plyr-color-main, hsl(198deg, 100%, 50%))));
+  background: var(--plyr-video-control-background-hover, var(--plyr-color-main, var(--plyr-color-main, hsl(198, 100%, 50%))));
   border: 0;
   border-radius: 100%;
   color: var(--plyr-video-control-color, #fff);
@@ -918,7 +912,6 @@ a.plyr__control::after, a.plyr__control::before {
   margin: 0;
   width: 100%;
   bottom: 0;
-  display: block;
   left: 0;
   position: fixed;
   right: 0;
@@ -961,7 +954,7 @@ a.plyr__control::after, a.plyr__control::before {
   width: 100%;
 }
 .plyr__ads::after {
-  background: hsl(216deg, 15%, 16%);
+  background: hsl(216, 15%, 16%);
   border-radius: 2px;
   bottom: var(--plyr-control-spacing, 10px);
   color: #fff;
@@ -991,8 +984,8 @@ a.plyr__control::after, a.plyr__control::before {
 }
 
 .plyr__preview-thumb {
-  background-color: var(--plyr-tooltip-background, rgba(255, 255, 255, 0.9));
-  border-radius: var(--plyr-tooltip-radius, 5px);
+  background-color: var(--plyr-tooltip-background, #fff);
+  border-radius: var(--plyr-menu-radius, 8px);
   bottom: 100%;
   box-shadow: var(--plyr-tooltip-shadow, 0 1px 2px rgba(0, 0, 0, 0.15));
   margin-bottom: calc(calc(var(--plyr-control-spacing, 10px) / 2) * 2);
@@ -1012,7 +1005,7 @@ a.plyr__control::after, a.plyr__control::before {
 .plyr__preview-thumb::before {
   border-left: var(--plyr-tooltip-arrow-size, 4px) solid transparent;
   border-right: var(--plyr-tooltip-arrow-size, 4px) solid transparent;
-  border-top: var(--plyr-tooltip-arrow-size, 4px) solid var(--plyr-tooltip-background, rgba(255, 255, 255, 0.9));
+  border-top: var(--plyr-tooltip-arrow-size, 4px) solid var(--plyr-tooltip-background, #fff);
   bottom: calc(var(--plyr-tooltip-arrow-size, 4px) * -1);
   content: "";
   height: 0;
@@ -1023,8 +1016,8 @@ a.plyr__control::after, a.plyr__control::before {
   z-index: 2;
 }
 .plyr__preview-thumb__image-container {
-  background: hsl(216deg, 15%, 79%);
-  border-radius: calc(var(--plyr-tooltip-radius, 5px) - 1px);
+  background: hsl(216, 15%, 79%);
+  border-radius: calc(var(--plyr-menu-radius, 8px) - 1px);
   overflow: hidden;
   position: relative;
   z-index: 0;
@@ -1048,8 +1041,8 @@ a.plyr__control::after, a.plyr__control::before {
 }
 .plyr__preview-thumb__time-container {
   background: var(--plyr-video-controls-background, linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)));
-  border-bottom-left-radius: calc(var(--plyr-tooltip-radius, 5px) - 1px);
-  border-bottom-right-radius: calc(var(--plyr-tooltip-radius, 5px) - 1px);
+  border-bottom-left-radius: calc(var(--plyr-menu-radius, 8px) - 1px);
+  border-bottom-right-radius: calc(var(--plyr-menu-radius, 8px) - 1px);
   bottom: 0;
   left: 0;
   line-height: 1.1;
@@ -1127,7 +1120,7 @@ a.plyr__control::after, a.plyr__control::before {
 [dir=rtl] .plyr__menu__container .plyr__control--forward::after {
   left: 5px;
   right: auto;
-  border-right-color: rgba(var(--plyr-menu-color, hsl(216deg, 15%, 34%)), 0.8);
+  border-right-color: rgba(var(--plyr-menu-color, hsl(216, 15%, 34%)), 0.8);
   border-left-color: transparent;
 }
 [dir=rtl] .plyr__menu__container .plyr__control--forward.plyr__tab-focus::after, [dir=rtl] .plyr__menu__container .plyr__control--forward:hover::after {
