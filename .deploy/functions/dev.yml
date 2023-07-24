@@ -1,0 +1,27 @@
+app:
+  timeout: 10
+  handler: handler/app.handler
+  environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
+  events:
+    - httpApi: "*"
+connect:
+  timeout: 10
+  handler: handler/websocket.connect
+  environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
+  events:
+    - websocket:
+        route: $connect
+disconnect:
+  timeout: 10
+  handler: handler/websocket.disconnect
+  environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
+  events:
+    - websocket:
+        route: $disconnect
+message:
+  timeout: 20
+  handler: handler/websocket.message
+  environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
+  events:
+    - websocket:
+        route: $default

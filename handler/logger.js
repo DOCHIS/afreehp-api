@@ -32,11 +32,9 @@ exports.handler = async (event, context) => {
         const timestampS = parseInt(timestamp / 1000);
         const timestampMs = timestamp % 1000;
 
-        const dynamodb = new DynamoDBClient({
-          region: process.env.AWS_DYNAMODB_REGION,
-        });
+        const dynamodb = new DynamoDBClient({ region: "ap-northeast-2" });
         const params = {
-          TableName: process.env.AWS_DYNAMODB_LOG_TABLE + "-" + stage,
+          TableName: "afreehp-log-" + stage,
           Item: {
             id: { S: timestamp + "-" + uuid.v4() },
             request_id: { S: request_id },

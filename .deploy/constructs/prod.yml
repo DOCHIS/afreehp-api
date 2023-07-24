@@ -1,0 +1,8 @@
+constructs:
+  website:
+    type: server-side-website
+    domain: afreehp.dochis.net
+    certificate: arn:aws:acm:us-east-1:048901423835:certificate/a4b11e86-a541-4bae-bd2c-56cab6c0a7dc
+    assets:
+      '/app/**': public/app
+      '/assets/**': public/assets

@@ -4,7 +4,9 @@ block addHead
   link(rel="stylesheet" href="/assets/dashboard/vendor/css/pages/app-chat.css")
   link(rel="stylesheet" href="/assets/dashboard/vendor/libs/perfect-scrollbar/perfect-scrollbar.css")
 
-block addScript 
+block addScript
+  script.
+    var WS_URL = "#{data.WS_URL}";
   script(src="/assets/dashboard/page/playground.js")
   script(src="/assets/dashboard/js/app-chat.js")
   script(src="/assets/dashboard/vendor/libs/perfect-scrollbar/perfect-scrollbar.js")
@@ -71,7 +73,7 @@ block content
                     label.form-label(for='test_msg') 메세지
                     input#test_msg.form-control(type='text' name="test_msg" placeholder='메세지를 입력하세요' value='테스트 메시지입니다.')
               button.btn.btn-primary(type='submit').mt-2 테스트 이벤트 생성
-              
+
       .col-xl
         .card.mb-4
           .card-header.d-flex.justify-content-between.align-items-center

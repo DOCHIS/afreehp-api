@@ -58,7 +58,7 @@ module.exports.page = proxy("http://afreehp.kr", {
       .replace(/http:\\\/\\\/afreecahelper.m.afreecatv.com/g, "")
       .replace(/http:\/\/afreecahelper.m.afreecatv.com/g, "")
       .replace("https://file.afreehp.kr", "")
-      .replace("</head>", "<script src='/app/page.js?v=2'></script></head>")
+      .replace("</head>", "<script>var WS_URL = '" + process.env.SOCKET_URL + "';</script><script src='/app/page.js?v=2'></script></head>")
       .replace(/ver: "(\d+)"/g, function (match, p1) {
         return "ver: '" + timestamp + "_" + p1 + "'";
       })

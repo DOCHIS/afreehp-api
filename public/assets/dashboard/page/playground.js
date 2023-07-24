@@ -1,4 +1,3 @@
-var WS_URL = "wss://1u34vaowee.execute-api.ap-northeast-2.amazonaws.com/dev"; // WebSocket URL
 var ws = null; // WebSocket 연결을 저장하는 변수
 var cmdQueue = []; // cmd 데이터를 저장하는 큐
 var isConnected = false; // WebSocket 연결 상태를 저장하는 변수

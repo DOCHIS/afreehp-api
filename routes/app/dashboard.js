@@ -78,6 +78,9 @@ async function logoutRoute(req, res) {
  * playground 라우팅
  */
 async function playgroundRoute(req, res) {
+  params.data = {
+    WS_URL: process.env.SOCKET_URL,
+  }
   return res.render("dashboard/playground", params);
 }
 

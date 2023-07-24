@@ -1,0 +1,11 @@
+custom:
+  capacities:
+    - table: afreehpLogTable
+      read:
+        minimum: 5
+        maximum: 1000     # Maximum read capacity
+        usage: 0.85
+      write:
+        minimum: 25
+        maximum: 1000
+        usage: 0.5

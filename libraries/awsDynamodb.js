@@ -16,10 +16,8 @@ const uuidv4 = require("uuid").v4;
 class awsDynamodb {
   constructor() {
     log.info("┃libraries│awsDynamodb│constructor");
-    this.client = new DynamoDBClient({
-      region: process.env.AWS_DYNAMODB_REGION,
-    });
-    this.table = process.env.AWS_DYNAMODB_TABLE + "-" + process.env.STAGE;
+    this.client = new DynamoDBClient({ region: "ap-northeast-2" });
+    this.table = "afreehp-" + process.env.STAGE;
   }
 
   /**
@@ -230,10 +228,22 @@ class awsDynamodb {
   ) {
     log.info("┃libraries│awsDynamodb│updateItemDetail");
     log.info("┃libraries│awsDynamodb│updateItemDetail┃Key", Key);
-    log.info("┃libraries│awsDynamodb│updateItemDetail┃UpdateExpression", UpdateExpression);
-    log.info("┃libraries│awsDynamodb│updateItemDetail┃ConditionExpression", ConditionExpression);
-    log.info("┃libraries│awsDynamodb│updateItemDetail┃ExpressionAttributeValues", ExpressionAttributeValues);
-    log.info("┃libraries│awsDynamodb│updateItemDetail┃ExpressionAttributeNames", ExpressionAttributeNames);
+    log.info(
+      "┃libraries│awsDynamodb│updateItemDetail┃UpdateExpression",
+      UpdateExpression
+    );
+    log.info(
+      "┃libraries│awsDynamodb│updateItemDetail┃ConditionExpression",
+      ConditionExpression
+    );
+    log.info(
+      "┃libraries│awsDynamodb│updateItemDetail┃ExpressionAttributeValues",
+      ExpressionAttributeValues
+    );
+    log.info(
+      "┃libraries│awsDynamodb│updateItemDetail┃ExpressionAttributeNames",
+      ExpressionAttributeNames
+    );
 
     if (!Key.PK) throw new Error("PK is required");
     if (!Key.SK) throw new Error("SK is required");
@@ -320,7 +330,7 @@ class awsDynamodb {
   async queryItems(params) {
     log.info("┃libraries│awsDynamodb│queryItems");
     log.info("┃libraries│awsDynamodb│queryItems┃params", params);
-    
+
     if (!params.KeyConditionExpression)
       throw new Error("KeyConditionExpression is required");
     if (!params.ExpressionAttributeValues)
