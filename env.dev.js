@@ -15,6 +15,13 @@ module.exports = {
    * 모든 IAM 권한정보는 serverless.yml을 통해 관리합니다.
    */
 
+  // app
+  APP_URL: "https://afreehp.dochis.net",
+  APP_HOME: "afreehp.dochis.net",
+  SOCKET_URL: "wss://1u34vaowee.execute-api.ap-northeast-2.amazonaws.com/dev",
+  STAGE: "dev",
+  DEBUG: true,
+  
   // secrets manager
   AWS_SECRET_MANAGER_REGION: "ap-northeast-2",
   AWS_SECRET_MANAGER_NAME: "afreehp",
@@ -22,4 +29,9 @@ module.exports = {
   // dynamodb
   AWS_DYNAMODB_REGION: "ap-northeast-2",
   AWS_DYNAMODB_TABLE: "afreehp",
+  AWS_DYNAMODB_LOG_TABLE: "afreehp-log",
+
+  // API Gateway
+  APIG_REGION: "ap-northeast-2",
+  APIG_ENDPOINT: "https://1u34vaowee.execute-api.ap-northeast-2.amazonaws.com/dev",
 };

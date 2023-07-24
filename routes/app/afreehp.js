@@ -8,7 +8,7 @@ module.exports = proxy("http://afreehp.kr");
 /**
  * 아프리카 도우미 프록시
  */
-module.exports.afreecahelper = proxy("http://afreecahelper.m.afreecatv.com")
+module.exports.afreecahelper = proxy("http://afreecahelper.m.afreecatv.com");
 
 /**
  * 오디오 파일 프록시
@@ -58,7 +58,7 @@ module.exports.page = proxy("http://afreehp.kr", {
       .replace(/http:\\\/\\\/afreecahelper.m.afreecatv.com/g, "")
       .replace(/http:\/\/afreecahelper.m.afreecatv.com/g, "")
       .replace("https://file.afreehp.kr", "")
-      .replace("</head>", "<script src='/js/page.js?v=2'></script></head>")
+      .replace("</head>", "<script src='/app/page.js?v=2'></script></head>")
       .replace(/ver: "(\d+)"/g, function (match, p1) {
         return "ver: '" + timestamp + "_" + p1 + "'";
       })
@@ -74,6 +74,9 @@ module.exports.page = proxy("http://afreehp.kr", {
  */
 module.exports.api = proxy("http://afreehp.kr", {
   userResDecorator: async function (proxyRes, proxyResData, userReq, userRes) {
+    // 요청 host 변조
+    userReq.headers["Origin"] = "http://afreehp.kr";
+    userReq.headers["Referer"] = "http://afreehp.kr/page/Upxxxxxxx8bYmqSVwJY";
     return proxyResData;
   },
 });

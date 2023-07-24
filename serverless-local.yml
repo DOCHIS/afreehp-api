@@ -7,7 +7,7 @@ provider:
   stage: dev
   region: ap-northeast-2
   architecture: arm64
-  memorySize: 512
+  memorySize: 1024
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -39,64 +39,46 @@ plugins:
 # functions 설정
 functions:
   app:
+    timeout: 10
     handler: handler/app.handler
-    environment: ${file(env.js)}
+    environment: ${file(env.${opt:stage, self:provider.stage}.js)}
     events:
       - httpApi: "*"
-  event:
-    handler: handler/event.handler
-    environment: ${file(env.js)}
-    events:
-      - sqs:
-          arn:
-            Fn::GetAtt:
-              - afreehpEventQueue
-              - Arn
   connect:
-    timeout: 5
+    timeout: 10
     handler: handler/websocket.connect
-    environment: ${file(env.js)}
+    environment: ${file(env.${opt:stage, self:provider.stage}.js)}
     events:
       - websocket:
           route: $connect
   disconnect:
-    timeout: 5
+    timeout: 10
     handler: handler/websocket.disconnect
-    environment: ${file(env.js)}
+    environment: ${file(env.${opt:stage, self:provider.stage}.js)}
     events:
       - websocket:
           route: $disconnect
   message:
-    timeout: 10
+    timeout: 20
     handler: handler/websocket.message
-    environment: ${file(env.js)}
+    environment: ${file(env.${opt:stage, self:provider.stage}.js)}
     events:
       - websocket:
           route: $default
-
-# resources 설정
-resources:
-  Resources:
-    afreehpEventQueue:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: afreehpEventQueue.fifo
-        FifoQueue: true
-        MessageRetentionPeriod: 86400
-        ReceiveMessageWaitTimeSeconds: 20
-        VisibilityTimeout: 60
-    afreehpTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: afreehp
-        AttributeDefinitions:
-          - AttributeName: PK
-            AttributeType: S
-          - AttributeName: SK
-            AttributeType: S
-        KeySchema:
-          - AttributeName: PK
-            KeyType: HASH
-          - AttributeName: SK
-            KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
+  logger:
+    timeout: 5
+    handler: handler/logger.handler
+    environment: ${file(env.${opt:stage, self:provider.stage}.js)}
+    events:
+      - cloudwatchLog:
+          logGroup: /aws/lambda/afreehp-api-${self:provider.stage}-app
+          filter: '[timestamp=*Z, request_id="*-*", event]'
+      - cloudwatchLog:
+          logGroup: /aws/lambda/afreehp-api-${self:provider.stage}-connect
+          filter: '[timestamp=*Z, request_id="*-*", event]'
+      - cloudwatchLog:
+          logGroup: /aws/lambda/afreehp-api-${self:provider.stage}-disconnect
+          filter: '[timestamp=*Z, request_id="*-*", event]'
+      - cloudwatchLog:
+          logGroup: /aws/lambda/afreehp-api-${self:provider.stage}-message
+          filter: '[timestamp=*Z, request_id="*-*", event]'

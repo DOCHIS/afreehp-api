@@ -3,7 +3,6 @@ const {
   PutItemCommand,
   GetItemCommand,
   DeleteItemCommand,
-  ScanCommand,
   UpdateItemCommand,
   QueryCommand,
 } = require("@aws-sdk/client-dynamodb");
@@ -16,10 +15,11 @@ const uuidv4 = require("uuid").v4;
  */
 class awsDynamodb {
   constructor() {
+    log.info("┃libraries│awsDynamodb│constructor");
     this.client = new DynamoDBClient({
       region: process.env.AWS_DYNAMODB_REGION,
     });
-    this.table = process.env.AWS_DYNAMODB_TABLE;
+    this.table = process.env.AWS_DYNAMODB_TABLE + "-" + process.env.STAGE;
   }
 
   /**
@@ -30,6 +30,9 @@ class awsDynamodb {
    * @returns {object} 결과값
    */
   async getItem(PK, SK) {
+    log.info("┃libraries│awsDynamodb│getItem");
+    log.info("┃libraries│awsDynamodb│getItem┃PK", PK);
+    log.info("┃libraries│awsDynamodb│getItem┃SK", SK);
     if (!PK) throw new Error("PK is required");
     const params = {
       TableName: this.table,
@@ -51,6 +54,9 @@ class awsDynamodb {
    *  @param {string} LastEvaluatedKey 다음 페이지가 있는지 확인하기 위한 키
    */
   async getItemsBySKStartsWith(PK, SK) {
+    log.info("┃libraries│awsDynamodb│getItemsBySKStartsWith");
+    log.info("┃libraries│awsDynamodb│getItemsBySKStartsWith┃PK", PK);
+    log.info("┃libraries│awsDynamodb│getItemsBySKStartsWith┃SK", SK);
     if (!PK) throw new Error("PK is required");
     if (!SK) throw new Error("SK is required");
     const params = {
@@ -79,6 +85,11 @@ class awsDynamodb {
    * @returns {object} 결과값
    */
   async getUniqueSK(PK, SKI, length = 9) {
+    log.info("┃libraries│awsDynamodb│getUniqueSK");
+    log.info("┃libraries│awsDynamodb│getUniqueSK┃PK", PK);
+    log.info("┃libraries│awsDynamodb│getUniqueSK┃SKI", SKI);
+    log.info("┃libraries│awsDynamodb│getUniqueSK┃length", length);
+
     if (!PK) throw new Error("PK is required");
     if (!SKI) throw new Error("SKI is required");
 
@@ -105,6 +116,9 @@ class awsDynamodb {
    * @returns {object} 결과값
    */
   async getUniqueUUID(use = null) {
+    log.info("┃libraries│awsDynamodb│getUniqueUUID");
+    log.info("┃libraries│awsDynamodb│getUniqueUUID┃use", use);
+
     let ID;
     let uuid_count = 0;
     do {
@@ -115,6 +129,7 @@ class awsDynamodb {
     this.putItem({
       PK: ID,
       SK: ID,
+      uuid: ID.split("#").pop(),
       uuid_count,
       uuid_use: use,
       created_at: Date.now(),
@@ -131,6 +146,9 @@ class awsDynamodb {
    *  @param {string} item.SK 정렬키 (required)
    */
   async putItem(item) {
+    log.info("┃libraries│awsDynamodb│putItem");
+    log.info("┃libraries│awsDynamodb│putItem┃item", item);
+
     if (!item.PK) throw new Error("PK is required");
     if (!item.SK) throw new Error("SK is required");
     const params = {
@@ -146,17 +164,19 @@ class awsDynamodb {
    * @description 아이템을 업데이트합니다.
    * @param {object} item 업데이트할 아이템
    * @param {string} item.PK 파티션키 (required)
-   * @param {string} item.SK 정렬키 (required)
+   * @param {string} item.SK 정렬키 (optional)
    * @param {*}      item.ANY 업데이트할 값
    * @returns {object} 결과값
    */
   async updateItem(item) {
+    log.info("┃libraries│awsDynamodb│updateItem");
+    log.info("┃libraries│awsDynamodb│updateItem┃item", item);
+
     if (!item.PK) throw new Error("PK is required");
-    if (!item.SK) throw new Error("SK is required");
 
     const data = { ...item };
     delete data.PK;
-    delete data.SK;
+    if (data?.SK) delete data.SK;
     if (Object.keys(data).length == 0)
       throw new Error("Update data is required");
 
@@ -182,9 +202,60 @@ class awsDynamodb {
     };
 
     const command = new UpdateItemCommand(params);
-    await this.client.send(command);
+    return await this.client.send(command);
+  }
 
-    return true;
+  /**
+   * update item detail
+   * @description 아이템 업데이트의 조건을 세분화하여 업데이트합니다.
+   * @param {object} Key 파티션키와 정렬키 (required)
+   *  @param {string} Key.PK 파티션키 (required)
+   *  @param {string} Key.SK 정렬키 (optional)
+   * @param {object} UpdateExpression 업데이트할 내용의 키 (required)
+   *  @example "SET #key = :value"
+   * @param {object} ConditionExpression 업데이트할 조건 (required)
+   *  @example "attribute_exists(#key)"
+   * @param {object} ExpressionAttributeValues 업데이트할 내용의 값 (required)
+   *  @example { ":value": "value" }
+   * @param {object} ExpressionAttributeNames 업데이트할 조건의 키 (required)
+   *  @example { "#key": "key" }
+   * @returns {object} 결과값
+   */
+  async updateItemDetail(
+    Key,
+    UpdateExpression,
+    ConditionExpression,
+    ExpressionAttributeValues,
+    ExpressionAttributeNames
+  ) {
+    log.info("┃libraries│awsDynamodb│updateItemDetail");
+    log.info("┃libraries│awsDynamodb│updateItemDetail┃Key", Key);
+    log.info("┃libraries│awsDynamodb│updateItemDetail┃UpdateExpression", UpdateExpression);
+    log.info("┃libraries│awsDynamodb│updateItemDetail┃ConditionExpression", ConditionExpression);
+    log.info("┃libraries│awsDynamodb│updateItemDetail┃ExpressionAttributeValues", ExpressionAttributeValues);
+    log.info("┃libraries│awsDynamodb│updateItemDetail┃ExpressionAttributeNames", ExpressionAttributeNames);
+
+    if (!Key.PK) throw new Error("PK is required");
+    if (!Key.SK) throw new Error("SK is required");
+    if (!UpdateExpression) throw new Error("UpdateExpression is required");
+    if (!ConditionExpression)
+      throw new Error("ConditionExpression is required");
+    if (!ExpressionAttributeValues)
+      throw new Error("ExpressionAttributeValues is required");
+    if (!ExpressionAttributeNames)
+      throw new Error("ExpressionAttributeNames is required");
+
+    const params = {
+      TableName: this.table,
+      Key: marshall(Key),
+      UpdateExpression,
+      ConditionExpression,
+      ExpressionAttributeValues: marshall(ExpressionAttributeValues),
+      ExpressionAttributeNames,
+    };
+
+    const command = new UpdateItemCommand(params);
+    return await this.client.send(command);
   }
 
   /**
@@ -196,6 +267,9 @@ class awsDynamodb {
    * @returns {object} 결과값
    */
   async saveItem(item) {
+    log.info("┃libraries│awsDynamodb│saveItem");
+    log.info("┃libraries│awsDynamodb│saveItem┃item", item);
+
     if (!item.PK) throw new Error("PK is required");
     if (!item.SK) throw new Error("SK is required");
 
@@ -204,6 +278,67 @@ class awsDynamodb {
     } else {
       await this.putItem(item);
     }
+  }
+
+  /**
+   * delete items
+   * @description PK와 PK 혹슨 PK를 통해 아이템을 삭제합니다.
+   * @param {object} Key 파티션키와 정렬키 (required)
+   *  @param {string} Key.PK 파티션키 (required)
+   *  @param {string} Key.SK 정렬키 (optional)
+   * @returns {object} 결과값
+   */
+  async deleteItem(Key) {
+    log.info("┃libraries│awsDynamodb│deleteItem");
+    log.info("┃libraries│awsDynamodb│deleteItem┃Key", Key);
+
+    if (!Key.PK) throw new Error("PK is required");
+
+    const params = {
+      TableName: this.table,
+      Key: marshall(Key),
+    };
+
+    const command = new DeleteItemCommand(params);
+    return await this.client.send(command);
+  }
+
+  /**
+   * query item
+   * @description 쿼리를 통해 아이템을 가져옵니다.
+   * @example 파라미터의 예시는 https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/actions/document-client/query.js#L8 를 참고하세요.
+   * @param {Object} params (required)
+   * @param {Object} params.KeyConditionExpression (required)
+   * @param {Object} params.ExpressionAttributeValues (required)
+   * @param {Object} params.FilterExpression (optional)
+   * @param {Object} params.ProjectionExpression (optional)
+   * @param {Object} params.ExclusiveStartKey (optional)
+   * @param {Object} params.ConsistentRead (optional)
+   * @param {Object} params.Limit (optional)
+   * @returns {object}
+   */
+  async queryItems(params) {
+    log.info("┃libraries│awsDynamodb│queryItems");
+    log.info("┃libraries│awsDynamodb│queryItems┃params", params);
+    
+    if (!params.KeyConditionExpression)
+      throw new Error("KeyConditionExpression is required");
+    if (!params.ExpressionAttributeValues)
+      throw new Error("ExpressionAttributeValues is required");
+
+    params.TableName = this.table;
+    params.ExpressionAttributeValues = marshall(
+      params.ExpressionAttributeValues
+    );
+
+    const command = new QueryCommand(params);
+    const data = await this.client.send(command);
+
+    console.log("data", data);
+    return {
+      Items: data.Items.map((item) => unmarshall(item)),
+      LastEvaluatedKey: data.LastEvaluatedKey,
+    };
   }
 }
 

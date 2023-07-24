@@ -5,7 +5,7 @@
   "scripts": {
     "deploy": "serverless deploy --aws-profile dochis --stage dev --config serverless.yml ",
     "print": "serverless print --aws-profile dochis --stage dev --config serverless.yml",
-    "serve": "serverless offline --aws-profile dochis --stage dev --config serverless-local.yml",
+    "serve": "serverless offline --aws-profile dochis --stage dev --config serverless-local.yml --httpPort 80",
     "watch": "nodemon -e js,ts,yml -x npm run serve"
   },
   "repository": {
@@ -18,23 +18,25 @@
   },
   "homepage": "https://github.com/DOCHIS/afreehp-api#readme",
   "devDependencies": {
+    "@aws-sdk/client-apigatewaymanagementapi": "3.370.0",
     "@aws-sdk/client-dynamodb": "^3.370.0",
     "@aws-sdk/util-dynamodb": "^3.370.0",
-    "serverless-lift": "1.20.2",
+    "install": "0.13.0",
+    "npm": "9.8.1",
+    "serverless-dynamodb-autoscaling": "0.6.2",
+    "serverless-lift": "1.27.0",
     "serverless-offline": "12.0.4",
     "serverless-plugin-layer-manager": "1.1.1"
   },
   "dependencies": {
-    "@aws-sdk/client-secrets-manager": "3.370.0",
     "body-parser": "1.20.2",
-    "connect-dynamodb": "3.0.0",
     "cookie-parser": "1.4.6",
     "express": "4.18.2",
     "express-http-proxy": "1.6.3",
-    "express-session": "1.17.3",
     "path": "0.12.7",
     "pug": "3.0.2",
     "serverless-http": "3.2.0",
-    "uuid": "9.0.0"
+    "uuid": "9.0.0",
+    "zlib": "1.0.5"
   }
 }

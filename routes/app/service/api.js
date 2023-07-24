@@ -56,27 +56,14 @@ module.exports.start = async function (req, res) {
     });
   }
 
-  // API 접근용 엑세스 토큰이 없다면 생성
-  const access_token = await dynamodb.getItemsBySKStartsWith(
-    `ALERTBOX#${idx}`,
-    "ACCESSTOKEN#"
-  );
-  if (!access_token) {
-    const accessToken = await dynamodb.getUniqueUUID('ACCESSTOKEN');
-    await dynamodb.putItem({
-      PK: `ALERTBOX#${idx}`,
-      SK: `ACCESSTOKEN#${accessToken}`,
-      access_token: accessToken,
-      created_at: Date.now(),
-    });
-  }
-
   // 쿠키 설정
+  // 프록시를 통해 쿠기가 넘어가지 않도록 PATH는 dashboard로 제한
   res.cookie("login_session", alertbox.alertbox_uid, {
     maxAge: 1000 * 60 * 60 * 24 * 365,
     httpOnly: true,
     secure: true,
     sameSite: "Strict",
+    path: "/dashboard",
   });
 
   // 결과값 반환

@@ -1,0 +1,84 @@
+extends _extends/default
+
+block addHead
+  link(rel="stylesheet" href="/assets/dashboard/vendor/css/pages/app-chat.css")
+  link(rel="stylesheet" href="/assets/dashboard/vendor/libs/perfect-scrollbar/perfect-scrollbar.css")
+
+block addScript 
+  script(src="/assets/dashboard/page/playground.js")
+  script(src="/assets/dashboard/js/app-chat.js")
+  script(src="/assets/dashboard/vendor/libs/perfect-scrollbar/perfect-scrollbar.js")
+
+block content
+  div.row.app-chat(style="height:auto")
+
+    .d-flex.flex-wrap.justify-content-between.align-items-center.mb-3
+      .d-flex.flex-column.justify-content-center
+        h4.mb-1.mt-3 Playground
+        p.text-muted API의 기능을 다양한 테스트해보세요!
+
+    .row
+      .col-xl
+        .card.mb-4
+          .card-header.d-flex.justify-content-between.align-items-center
+            h5.mb-0 Step.1 JOIN
+          .card-body
+            form#configForm
+              .mb-3
+                label.form-label(for='alertbox_idx') alertbox_idx
+                input#alertbox_idx.form-control(type='text' name="alertbox_idx" placeholder='alertbox의 idx값을 입력하세요' value=alertbox.alertbox_idx)
+              .mb-3
+                label.form-label 수신받을 이벤트
+                  .demo-inline-spacing
+                    // for문을 통해 input 생성
+                    each event in ['donation', 'up', 'follow', 'host', 'raid', 'chat', 'join', 'stats']
+                      label.switch.switch-primary
+                        input.switch-input(type='checkbox' checked='' name="join_room" value=event)
+                        span.switch-toggle-slider
+                          span.switch-on
+                            i.bx.bx-check
+                          span.switch-off
+                            i.bx.bx-x
+                        span.switch-label=event
+              button.btn.btn-primary(type='submit') Join 실행
+
+        .card.mb-4
+          .card-header.d-flex.justify-content-between.align-items-center
+            h5.mb-0 Step.2 테스트 이벤트 생성기
+          .card-body
+            form#testForm
+              .row
+                .col-lg-6
+                  .mb-3
+                    label.form-label(for='test_event') 이벤트 선택
+                    select#test_event.form-select(name='test_event')
+                      option(value='donation') 후원
+                      option(value='chat') 채팅
+                .col-lg-6
+                  .mb-3
+                    label.form-label(for='test_amount') 별풍선 겟수 (후원일 경우)
+                    input#test_amount.form-control(type='number' name="test_amount" placeholder='별풍선 겟수를 입력하세요' value=20)
+                .col-lg-6
+                  .mb-3
+                    label.form-label(for='test_id') 사용자 ID
+                    input#test_id.form-control(type='text' name="test_id" placeholder='사용자 ID를 입력하세요' value='test')
+                .col-lg-6
+                  .mb-3
+                    label.form-label(for='test_name') 사용자 명
+                    input#test_name.form-control(type='text' name="test_name" placeholder='사용자 명을 입력하세요' value='테스트 전용')
+                .col-lg-12
+                  .mb-3
+                    label.form-label(for='test_msg') 메세지
+                    input#test_msg.form-control(type='text' name="test_msg" placeholder='메세지를 입력하세요' value='테스트 메시지입니다.')
+              button.btn.btn-primary(type='submit').mt-2 테스트 이벤트 생성
+              
+      .col-xl
+        .card.mb-4
+          .card-header.d-flex.justify-content-between.align-items-center
+            h5.mb-0 소켓 미리보기
+            i#socketLogsClean.bx.bxs-trash.cursor-pointer.d-sm-block.d-none.fs-4
+          .card-body
+            .col.app-chat-history
+              .chat-history-wrapper
+                .chat-history-body
+                  ul#socketLogs.list-unstyled.chat-history.mb-0
