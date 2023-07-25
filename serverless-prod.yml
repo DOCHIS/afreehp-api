@@ -23,7 +23,7 @@ functions:
   disconnect: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):disconnect}
   message: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):message}
   logger: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):logger}
-  
+
 # resources 설정
 resources: ${file(.deploy/resources/${opt:stage, self:provider.stage}.yml):resources}
 
