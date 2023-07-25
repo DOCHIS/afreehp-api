@@ -21,8 +21,9 @@ module.exports = {
   SOCKET_URL: "wss://so7z4grhsf.execute-api.ap-northeast-2.amazonaws.com/dev",
   STAGE: "dev",
   DEBUG: true,
-  
+
   // API Gateway
   APIG_REGION: "ap-northeast-2",
-  APIG_ENDPOINT: "https://so7z4grhsf.execute-api.ap-northeast-2.amazonaws.com/dev",
-};
+  APIG_ENDPOINT:
+    "https://so7z4grhsf.execute-api.ap-northeast-2.amazonaws.com/dev",
+}

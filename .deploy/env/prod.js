@@ -21,8 +21,9 @@ module.exports = {
   SOCKET_URL: "wss://afreehp-api.dochis.net/",
   STAGE: "dev",
   DEBUG: true,
-  
+
   // API Gateway
   APIG_REGION: "ap-northeast-2",
-  APIG_ENDPOINT: "https://a3baedabf8.execute-api.ap-northeast-2.amazonaws.com/prod",
-};
+  APIG_ENDPOINT:
+    "https://a3baedabf8.execute-api.ap-northeast-2.amazonaws.com/prod",
+}

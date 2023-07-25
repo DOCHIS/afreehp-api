@@ -31,9 +31,6 @@ resources:
           - AttributeName: id
             KeyType: HASH
         BillingMode: PROVISIONED
-        ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 25
         TimeToLiveSpecification:
           AttributeName: ttl
           Enabled: true

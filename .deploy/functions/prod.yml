@@ -5,7 +5,7 @@ app:
     - { Ref: ModulesLambdaLayer }
   environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
   events:
-    - httpApi: '*'
+    - httpApi: "*"
 connect:
   timeout: 10
   handler: handler/websocket.connect

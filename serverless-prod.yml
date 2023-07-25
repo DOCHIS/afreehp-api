@@ -12,7 +12,6 @@ provider:
 
 # plugins 설정
 plugins:
-  - serverless-dynamodb-autoscaling
   - serverless-plugin-layer-manager
   - serverless-lift
 
