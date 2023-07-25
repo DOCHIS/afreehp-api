@@ -2,7 +2,7 @@
 dynamodb는 AWS의 권장사항에 따라 Single Table Design을 채택하였습니다. 이 디자인 방식 채택을 통해 읽기/쓰기 용량을 효율적으로 관리할 수 있습니다.
 
 ## 테이블 설계
-![ER 다이어그램](https://github.com/dochis/afreehp-api/blob/main/.github/docs/statics/aws_dynamodb.png?raw=true)
+![ER 다이어그램](https://raw.githubusercontent.com/dochis/afreehp-api/prod/.github/docs/statics/aws_dynamodb.png)
 
 ## PK & SK
 |모델|PK|SK|Description|

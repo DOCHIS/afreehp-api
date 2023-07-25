@@ -34,7 +34,7 @@ message:
     - websocket:
         route: $default
 logger:
-  timeout: 5
+  timeout: 4
   handler: handler/logger.handler
   layers:
     - { Ref: ModulesLambdaLayer }
