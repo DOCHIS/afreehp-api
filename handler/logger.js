@@ -7,7 +7,6 @@ exports.handler = async (event, context) => {
   try {
     const data = Buffer.from(event.awslogs.data, "base64");
     const payload = JSON.parse(zlib.gunzipSync(data).toString("utf8"));
-    console.log(">> payload", payload);
 
     const { logGroup, messageType, logStream } = payload;
     const logGroupSplit = logGroup.split("-");
@@ -15,19 +14,14 @@ exports.handler = async (event, context) => {
     const ttlPeriod = stage === "dev" ? 3 : 90;
     const ttl = 60 * 60 * 24 * ttlPeriod;
 
-    console.log(">> data", event.awslogs.data);
-    console.log(">> length:", payload.logEvents.length);
     if (payload.logEvents.length > 0) {
       for (const logEvent of payload.logEvents) {
         const message = logEvent.message;
         const messageSplit = logEvent.message.split("\t");
         const messageNL = logEvent.message.split("\n");
-        const messageFirstLine = messageNL[0];
 
         const request_id = messageSplit[1];
         const message_type = messageSplit[2];
-
-        console.log(">> ", request_id, messageFirstLine);
 
         const timestamp = logEvent.timestamp;
         const timestampS = parseInt(timestamp / 1000);
@@ -52,17 +46,14 @@ exports.handler = async (event, context) => {
           },
         };
 
-        console.log(">> params", params);
-
         const command = new PutItemCommand(params);
         await dynamodb.send(command);
       }
     }
   } catch (e) {
-    console.log(">> error!!", e);
+    console.error(">> error!!", e);
   }
 
-  console.log(">> done");
   return {
     statusCode: 200,
     body: JSON.stringify({

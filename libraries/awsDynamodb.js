@@ -344,7 +344,6 @@ class awsDynamodb {
     const command = new QueryCommand(params);
     const data = await this.client.send(command);
 
-    console.log("data", data);
     return {
       Items: data.Items.map((item) => unmarshall(item)),
       LastEvaluatedKey: data.LastEvaluatedKey,
