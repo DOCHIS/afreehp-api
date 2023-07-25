@@ -18,7 +18,6 @@ exports.handler = async (event, context) => {
       for (const logEvent of payload.logEvents) {
         const message = logEvent.message;
         const messageSplit = logEvent.message.split("\t");
-        const messageNL = logEvent.message.split("\n");
 
         const request_id = messageSplit[1];
         const message_type = messageSplit[2];
