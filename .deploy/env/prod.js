@@ -19,7 +19,7 @@ module.exports = {
   APP_URL: "https://afreehp.dochis.net",
   APP_HOME: "afreehp.dochis.net",
   SOCKET_URL: "wss://afreehp-api.dochis.net/",
-  STAGE: "dev",
+  STAGE: "prod",
   DEBUG: true,
 
   // API Gateway
