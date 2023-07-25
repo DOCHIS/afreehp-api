@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     const { logGroup, messageType, logStream } = payload;
     const logGroupSplit = logGroup.split("-");
     const stage = logGroupSplit[2];
-    const ttlPeriod = sage === "dev" ? 4 : 90;
+    const ttlPeriod = stage === "dev" ? 4 : 90;
     const ttl = 60 * 60 * 24 * ttlPeriod;
 
     console.log(">> data", event.awslogs.data);
