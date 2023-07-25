@@ -33,3 +33,22 @@ message:
   events:
     - websocket:
         route: $default
+logger:
+  timeout: 5
+  handler: handler/logger.handler
+  layers:
+    - { Ref: ModulesLambdaLayer }
+  environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
+  events:
+    - cloudwatchLog:
+        logGroup: /aws/lambda/afreehp-api-${self:provider.stage}-app
+        filter: '[timestamp=*Z, request_id="*-*", event]'
+    - cloudwatchLog:
+        logGroup: /aws/lambda/afreehp-api-${self:provider.stage}-connect
+        filter: '[timestamp=*Z, request_id="*-*", event]'
+    - cloudwatchLog:
+        logGroup: /aws/lambda/afreehp-api-${self:provider.stage}-disconnect
+        filter: '[timestamp=*Z, request_id="*-*", event]'
+    - cloudwatchLog:
+        logGroup: /aws/lambda/afreehp-api-${self:provider.stage}-message
+        filter: '[timestamp=*Z, request_id="*-*", event]'
