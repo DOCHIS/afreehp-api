@@ -1,0 +1,22 @@
+service: afreehp-api
+
+# provider 설정
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: local
+  region: ap-northeast-2
+  architecture: arm64
+  memorySize: ${file(.deploy/provider/${opt:stage, self:provider.stage}.yml):memorySize}
+  iamRoleStatements: ${file(.deploy/provider/${opt:stage, self:provider.stage}.yml):iamRoleStatements}
+
+# plugins 설정
+plugins:
+  - serverless-offline
+
+# functions 설정
+functions:
+  app: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):app}
+  connect: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):connect}
+  disconnect: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):disconnect}
+  message: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):message}

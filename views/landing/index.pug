@@ -1,0 +1,165 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(content='width=device-width, initial-scale=1.0' name='viewport')
+
+  title 아프리카TV API | 헛삯 LAP
+
+  meta(content='' name='description')
+  meta(content='' name='keywords')
+
+  // Favicons
+  link(href='/assets/landing/img/favicon.png' rel='icon')
+  link(href='/assets/landing/img/apple-touch-icon.png' rel='apple-touch-icon')
+
+  // Fonts
+  link(href='/assets/landing/font/pretendard-subset.css' rel='stylesheet')
+
+  // Vendor CSS Files
+  link(href='/assets/landing/vendor/aos/aos.css' rel='stylesheet')
+  link(href='/assets/landing/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
+  link(href='/assets/landing/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='/assets/landing/vendor/glightbox/css/glightbox.min.css' rel='stylesheet')
+  link(href='/assets/landing/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='/assets/landing/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+  
+  // Template Main CSS File
+  link(href='/assets/landing/css/style.css' rel='stylesheet')
+  link(href='/assets/landing/css/service.css' rel='stylesheet')
+
+header#header.header.fixed-top
+  .container-fluid.container-xl.d-flex.align-items-center.justify-content-between
+    a.logo.d-flex.align-items-center(href='index.html')
+      img(src='/assets/landing/img/logo.png' alt='')
+      span 헛삯 LAP
+    nav#navbar.navbar
+      ul
+        li
+          a.getstarted.scrollto(href='/dashboard/start')
+            i.bi.bi-box-arrow-in-right.me-2
+            | 시작하기
+      i.bi.bi-list.mobile-nav-toggle
+
+section#hero.hero.d-flex.align-items-center
+  .container
+    .row
+      .col-lg-6.d-flex.flex-column.justify-content-center
+        h1(data-aos='fade-up') 아프리카TV의 채팅 및 후원내역 API (비공식)
+        h2(data-aos='fade-up' data-aos-delay='400') 아프리카 도우미를 사용중이시라면 지금 바로 무료로 제공되는 API를 사용하실 수 있습니다.!
+        div(data-aos='fade-up' data-aos-delay='600')
+          .text-center.text-lg-start
+            a.btn-get-started.scrollto.d-inline-flex.align-items-center.justify-content-center.align-self-center(href='#about')
+              span 스크롤을 내려 설명을 읽어주세요
+              i.bi.bi-arrow-down
+      .col-lg-6.hero-img(data-aos='zoom-out' data-aos-delay='200')
+        img.img-fluid(src='/assets/landing/img/hero-img.png' alt='')
+
+main#main
+  // ======= About Section =======
+  section#about.about
+    .container(data-aos='fade-up')
+      .row.gx-0
+        .col-lg-6.d-flex.flex-column.justify-content-center(data-aos='fade-up' data-aos-delay='200')
+          .content
+            h3 이 서비스에 대하여
+            h2 트위치와 유튜브에서는 채팅과 후원에 대한 API를 제공하기 때문에 이를 바탕으로 게임이나 재미있는 컨텐츠가 많이 개발되고 있습니다.
+            p
+              | 다만 아프리카TV의 경우 현재까진 이에 대한 제약 사항이 많아 개발자들이 이를 사용하기가 어려웠습니다. 그래서 해당 API를 사용하기 쉽게 제작해보았습니다.
+              | 이 프로젝트를 통해 아프리카TV에서도 좀 더 다양한 컨텐츠가 개발될 수 있기를 바랍니다.
+        .col-lg-6.d-flex.align-items-center(data-aos='zoom-out' data-aos-delay='200')
+          img.img-fluid(src='/assets/landing/img/about.jpg' alt='')
+
+  // ======= Values Section =======
+  section#values.values
+    .container(data-aos='fade-up')
+      header.section-header
+        h2 제공되는 API
+        p 이런 API를 제공해드리고 있습니다.
+      .row
+        .col-lg-4(data-aos='fade-up' data-aos-delay='200')
+          .box
+            img.img-fluid(src='/assets/landing/img/values-1.png' alt='')
+            h3 실시간 채팅 API
+            p 시청자들이 입력하는 채팅 데이터를 제공합니다.
+        .col-lg-4.mt-4.mt-lg-0(data-aos='fade-up' data-aos-delay='600')
+          .box
+            img.img-fluid(src='/assets/landing/img/values-3.png' alt='')
+            h3 실시간 후원정보 API
+            p 시청자들이 후원한 별풍선/애드벌룬/스티커 등의 정보를 제공합니다.
+        .col-lg-4.mt-4.mt-lg-0(data-aos='fade-up' data-aos-delay='400')
+          .box
+            img.img-fluid(src='/assets/landing/img/values-2.png' alt='')
+            h3 룰렛 결과 API (준비중)
+            p 아프리카 도우미에서 제공되는 룰렛의 결과를 API로 제공합니다. (준비 중)
+
+  // ======= Features Section =======
+  section#features.features
+    .container.aos-init.aos-animate(data-aos='fade-up')
+      header.section-header
+        h2 양해바랍니다
+        p 아직 배타 단계의 프로그램입니다.
+      .row
+        .col-lg-6
+          img.img-fluid(src='/assets/landing/img/features.png' alt='')
+        .col-lg-6.mt-5.mt-lg-0.d-flex
+          .row.align-self-center.gy-4
+            .col-md-6.aos-init.aos-animate(data-aos='zoom-out' data-aos-delay='200')
+              .feature-box.d-flex.align-items-center
+                i.bi.bi-check
+                h3 안정성 문제 있을 수 있음
+            .col-md-6.aos-init.aos-animate(data-aos='zoom-out' data-aos-delay='300')
+              .feature-box.d-flex.align-items-center
+                i.bi.bi-check
+                h3 충분히 검증되지 않았음
+            .col-md-12.aos-init.aos-animate(data-aos='zoom-out' data-aos-delay='400')
+              .feature-box.d-flex.align-items-center
+                i.bi.bi-check
+                h3 아프리카 도우미에서 공식지원하게 될 경우 사라질 수 있음
+            .col-md-12.aos-init.aos-animate(data-aos='zoom-out' data-aos-delay='300')
+              .feature-box.d-flex.align-items-center
+                i.bi.bi-check
+                h3 유료화 예정 : 현재까진 없음
+
+      // Feature Tabs
+      .row.feture-tabs.aos-init.aos-animate(data-aos='fade-up')
+        .col-lg-6
+          h3 디스코드 커뮤니티에 가입하세요!
+          p(style='line-height: 2.5')
+            | 최대한 안정적인 서비스 제공을 위해 디스코드 커뮤니티를 개설하였습니다.
+            br
+            | 궁금하신 점이나 사용 중 혹은 사용 전 문의사항이 있으시면 언제든지 문의해주세요.
+            br
+            | 서비스와 관련한 중요 공지사항이 있는 경우에도 디스코드로 공지하겠습니다.
+            br
+            | 커뮤니티 가입이 망설여지신다면, code.hutsak(디스코드)로 DM을 주셔도 됩니다.
+          a.btn.btn-primary.mt-2.mb-2.btn-lg(href='https://discord.gg/cNVpzCkEvM' target='_blank')
+            i.bi.bi-discord(style='margin-right:10px')
+            | 디스코드 커뮤니티 바로가기
+        .col-lg-6
+          img.img-fluid(src='/assets/landing/img/features-2.png' alt='')
+
+// ======= Footer =======
+footer#footer.footer
+  .container
+    .copyright
+      | &copy; Copyright 
+      strong
+        span FlexStart
+      | . All Rights Reserved
+    .credits
+      | Designed by 
+      a(href='https://bootstrapmade.com/') BootstrapMade
+
+a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
+  i.bi.bi-arrow-up-short
+
+// Vendor JS Files
+script(src='/assets/landing/vendor/purecounter/purecounter_vanilla.js')
+script(src='/assets/landing/vendor/aos/aos.js')
+script(src='/assets/landing/vendor/bootstrap/js/bootstrap.bundle.min.js')
+script(src='/assets/landing/vendor/glightbox/js/glightbox.min.js')
+script(src='/assets/landing/vendor/isotope-layout/isotope.pkgd.min.js')
+script(src='/assets/landing/vendor/swiper/swiper-bundle.min.js')
+
+// Template Main JS File
+script(src='/assets/landing/js/main.js')

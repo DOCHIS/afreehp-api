@@ -1,0 +1,6 @@
+constructs:
+  website:
+    type: server-side-website
+    assets:
+      '/app/**': public/app
+      '/assets/**': public/assets

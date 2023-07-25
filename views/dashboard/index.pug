@@ -1,0 +1,73 @@
+extends _extends/default
+
+block content
+  div.row
+
+    // 주의
+    div.col-lg-12.mb-2
+      .alert.alert-danger.d-flex(role='alert')
+        span.badge.badge-center.rounded-pill.bg-danger.border-label-danger.p-3.me-2
+          i.bx.bx-error-circle
+        .d-flex.flex-column.ps-1
+          h6.alert-heading.d-flex.align-items-center.mb-1 주의사항
+          span 이 사이트에는 방송에 노출되어서는 안되는 민감한 정보가 자주 표시됩니다. 이 사이트를 방송에 노출시키지 마세요.
+
+    // 환영!
+    div.col-lg-8.mb-4
+      div.card
+        div.d-flex.align-items-end.row
+          div.col-sm-7
+            div.card-body
+              h5.card-title.text-primary API 서비스 방문을 환영합니다 👋
+              p.mb-4
+                | 이 프로젝트는 아프리카의 채팅, 별풍선 후원 내역 등과 연동 된 게임, 컨텐츠 개발을 돕기 위해 제작 된 프로젝트입니다. 안정성을 높이기 위한 노력을 많이 하고 있으나, 아직은 배타인 점 양해 부탁드립니다.
+          div.col-sm-5.text-center.text-sm-left
+            div.card-body.pb-0.px-0.px-md-4
+              img(src="/assets/dashboard/img/illustrations/man-with-laptop-light.png" height="140")
+
+    // 기술지원
+    div.col-lg-4.mb-4
+      div.card
+        div.card-body
+          h4.mb-2.pb-1
+          p.small
+            span.me-2 API 오류가 발생하시나요? 디스코드에 문의해주세요! 당신의 아이디는
+            span=alertbox.SK
+            span 입니다.
+          div.col-12.text-center
+            a(href="https://discord.gg/cNVpzCkEvM" target="_blank").btn.btn-primary.w-100.d-grid 디스코드 커뮤니티 바로가기
+
+    // 새로운 위젯주소
+    div.app-academy
+      div.card.p-0.mb-4
+        div.card-body.d-flex.flex-column.flex-md-row.justify-content-between.p-0.pt-4
+          div.app-academy-md-25.card-body.py-0
+            img(src="/assets/dashboard/img/illustrations/bulb-light.png" height="90").img-fluid.app-academy-img-height.scaleX-n1-rtl
+          div.app-academy-md-50.card-body.d-flex.align-items-md-center.flex-column.text-md-center
+            h3.card-title.mb-4.lh-sm.px-md-5.text-center
+              span.me-2 API 사용을 위해 위젯 주소를
+              span.text-primary.fw-medium.text-nowrap 아래 주소로 변경
+              span 해주세요!
+            p.mb-4 아프리카 도우미 API 서비스는 기존 후원 위젯을 프록시를 통해 데이터를 수집하고 해당 데이터를 제공하는 방식으로 제공됩니다. 따라서 반드시 기존 후원 위젯의 주소를 아래 주소로 변경해주셔야 합니다.
+            div.d-flex.align-items-center.justify-content-between.app-academy-md-80
+              div.form-password-toggle
+                div.input-group
+                  input(type="text" value=data.new_alertbox_url)#alertbox_url.form-control
+                  span#copy_alertbox_url.input-group-text.cursor-pointer
+                    i.bx.bx-copy-alt
+          div.app-academy-md-25.d-flex.align-items-end.justify-content-end
+            img(src="/assets/dashboard/img/illustrations/pencil-rocket.png" height="188").scaleX-n1-rtl
+
+    // API 문서
+
+
+block addScript
+  script.
+    $("#copy_alertbox_url").click(function(){
+      var copyText = $("#alertbox_url").val();
+      navigator.clipboard.writeText(copyText).then(function() {
+        toastr.success('복사되었습니다.');
+      }, function() {
+        toastr.error('복사에 실패하였습니다.');
+      });
+    })

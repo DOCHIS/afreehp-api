@@ -1,0 +1,62 @@
+name: Serverless Deploy
+on:
+  push:
+    branches:
+      - prod
+      - dev
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
+      - name: Install Global Dependencies
+        run: |
+          npm install -g serverless
+          npm install -g serverless-dynamodb-autoscaling
+          npm install -g serverless-plugin-layer-manager
+      - name: Install dependencies
+        run: |
+          npm install --omit=dev --platform=linux --arch=arm64
+      - name: Make Lambda Layer Directory
+        run: |
+          mkdir -p nodejs/nodejs
+          mv node_modules nodejs/nodejs
+          echo "check"
+          echo "/"
+          ls -al
+          echo "/nodejs"
+          ls -al nodejs
+          echo "/nodejs/nodejs"
+          ls -al nodejs/nodejs
+          echo "/nodejs/nodejs/node_modules"
+          ls -al nodejs/nodejs/node_modules
+      - name: Before Deploy Run Script
+        run: |
+          echo "// TODO. Before Deploy Run Script"
+          echo "./node_modules/serverless-lift 디렉토리 내 모든 파일에서 ViewerProtocolPolicy.REDIRECT_TO_HTTPS 라는 문자를 찾아 ViewerProtocolPolicy.ALLOW_ALL로 변경하는 스크립트"
+          echo "시간이 없어 빠르게 만들었기 때문에, ViewerProtocolPolicy.REDIRECT_TO_HTTPS 라는 문자가 있는 파일만 변경하도록 만들었습니다."
+          echo "향후 PR을 통해 더 좋은 방법으로 변경하겠습니다."
+          npm install serverless-lift
+          find ./node_modules/serverless-lift -type f -name "*.js" -exec sed -i 's/ViewerProtocolPolicy.REDIRECT_TO_HTTPS/ViewerProtocolPolicy.ALLOW_ALL/g' {} +
+      - name: Deploy
+        run: npm run deploy:${{ github.ref == 'refs/heads/prod' && 'prod' || 'dev' }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

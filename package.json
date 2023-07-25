@@ -1,0 +1,42 @@
+{
+  "name": "afreehp-api",
+  "version": "1.0.0",
+  "description": "이 프로젝트는 아프리카 도우미를 통해 후원 내역과 룰렛 결과 등을 API로 조회할 수 있도록 제작된 프로젝트입니다.",
+  "scripts": {
+    "deploy:prod": "serverless deploy --config serverless-prod.yml",
+    "deploy:dev": "serverless deploy --config serverless-dev.yml",
+    "print:prod": "serverless print --config serverless-prod.yml",
+    "print:dev": "serverless print --config serverless-dev.yml",
+    "serve": "serverless offline --config serverless-local.yml --httpPort 80",
+    "watch": "nodemon -e js,ts,yml -x npm run serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DOCHIS/afreehp-api.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DOCHIS/afreehp-api/issues"
+  },
+  "homepage": "https://github.com/DOCHIS/afreehp-api#readme",
+  "devDependencies": {
+    "@aws-sdk/client-apigatewaymanagementapi": "3.370.0",
+    "@aws-sdk/client-dynamodb": "^3.370.0",
+    "@aws-sdk/util-dynamodb": "^3.370.0",
+    "serverless-dynamodb-autoscaling": "0.6.2",
+    "serverless-lift": "1.27.0",
+    "serverless-offline": "12.0.4",
+    "serverless-plugin-layer-manager": "1.1.1"
+  },
+  "dependencies": {
+    "body-parser": "1.20.2",
+    "cookie-parser": "1.4.6",
+    "express": "4.18.2",
+    "express-http-proxy": "1.6.3",
+    "path": "0.12.7",
+    "pug": "3.0.2",
+    "serverless-http": "3.2.0",
+    "uuid": "9.0.0",
+    "zlib": "1.0.5"
+  }
+}

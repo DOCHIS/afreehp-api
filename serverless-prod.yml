@@ -1,0 +1,43 @@
+service: afreehp-api
+
+# provider 설정
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: prod
+  region: ap-northeast-2
+  architecture: arm64
+  memorySize: ${file(.deploy/provider/${opt:stage, self:provider.stage}.yml):memorySize}
+  iamRoleStatements: ${file(.deploy/provider/${opt:stage, self:provider.stage}.yml):iamRoleStatements}
+
+# plugins 설정
+plugins:
+  - serverless-dynamodb-autoscaling
+  - serverless-plugin-layer-manager
+  - serverless-lift
+
+# functions 설정
+functions:
+  app: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):app}
+  connect: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):connect}
+  disconnect: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):disconnect}
+  message: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):message}
+
+# resources 설정
+resources: ${file(.deploy/resources/${opt:stage, self:provider.stage}.yml):resources}
+
+# constructs 설정
+constructs: ${file(.deploy/constructs/${opt:stage, self:provider.stage}.yml):constructs}
+
+# layers 설정
+layers: ${file(.deploy/layers/${opt:stage, self:provider.stage}.yml):layers}
+
+# custom 설정
+custom: ${file(.deploy/custom/${opt:stage, self:provider.stage}.yml):custom}
+
+# package 설정
+package:
+  exclude:
+    - .github/**
+    - public/**
+    - node_modules/**

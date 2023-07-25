@@ -1,0 +1,13 @@
+custom:
+  layerConfig:
+    installLayers: false
+  capacities:
+    - table: afreehpLogTable
+      read:
+        minimum: 5
+        maximum: 100
+        usage: 0.85
+      write:
+        minimum: 5
+        maximum: 100
+        usage: 0.5

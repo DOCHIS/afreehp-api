@@ -1,0 +1,24 @@
+memorySize: 1024
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - apigateway:ManageConnections
+      - execute-api:ManageConnection
+    Resource: 'arn:aws:execute-api:ap-northeast-2:*:*'
+  - Effect: Allow
+    Action:
+      - sqs:SendMessage
+      - sqs:ReceiveMessage
+      - sqs:DeleteMessage
+      - sqs:GetQueueAttributes
+    Resource: 'arn:aws:sqs:ap-northeast-2:*:*'
+  - Effect: Allow
+    Action:
+      - dynamodb:Query
+      - dynamodb:Scan
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:UpdateItem
+      - dynamodb:DeleteItem
+      - dynamodb:CreateTable
+    Resource: 'arn:aws:dynamodb:ap-northeast-2:*:*'
