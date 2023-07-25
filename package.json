@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "이 프로젝트는 아프리카 도우미를 통해 후원 내역과 룰렛 결과 등을 API로 조회할 수 있도록 제작된 프로젝트입니다.",
   "scripts": {
-    "deploy:prod": "serverless deploy --aws-profile dochis --config serverless-prod.yml",
-    "deploy:dev": "serverless deploy --aws-profile dochis --config serverless-dev.yml",
-    "print:prod": "serverless print --aws-profile dochis --config serverless-prod.yml",
-    "print:dev": "serverless print --aws-profile dochis --config serverless-dev.yml",
-    "serve": "serverless offline --aws-profile dochis --config serverless-local.yml --httpPort 80",
+    "deploy:prod": "serverless deploy --config serverless-prod.yml",
+    "deploy:dev": "serverless deploy --config serverless-dev.yml",
+    "print:prod": "serverless print --config serverless-prod.yml",
+    "print:dev": "serverless print --config serverless-dev.yml",
+    "serve": "serverless offline --config serverless-local.yml --httpPort 80",
     "watch": "nodemon -e js,ts,yml -x npm run serve"
   },
   "repository": {
@@ -23,8 +23,6 @@
     "@aws-sdk/client-apigatewaymanagementapi": "3.370.0",
     "@aws-sdk/client-dynamodb": "^3.370.0",
     "@aws-sdk/util-dynamodb": "^3.370.0",
-    "install": "0.13.0",
-    "npm": "9.8.1",
     "serverless-dynamodb-autoscaling": "0.6.2",
     "serverless-lift": "1.27.0",
     "serverless-offline": "12.0.4",

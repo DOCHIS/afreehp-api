@@ -29,6 +29,9 @@ resources: ${file(.deploy/resources/${opt:stage, self:provider.stage}.yml):resou
 # constructs 설정
 constructs: ${file(.deploy/constructs/${opt:stage, self:provider.stage}.yml):constructs}
 
+# layers 설정
+layers: ${file(.deploy/layers/${opt:stage, self:provider.stage}.yml):layers}
+
 # custom 설정
 custom: ${file(.deploy/custom/${opt:stage, self:provider.stage}.yml):custom}
 
@@ -37,3 +40,4 @@ package:
   exclude:
     - .github/**
     - public/**
+    - node_modules/**

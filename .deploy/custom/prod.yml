@@ -1,4 +1,6 @@
 custom:
+  layerConfig:
+    installLayers: false
   capacities:
     - table: afreehpLogTable
       read:

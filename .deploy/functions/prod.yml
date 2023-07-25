@@ -1,12 +1,16 @@
 app:
   timeout: 10
   handler: handler/app.handler
+  layers:
+    - { Ref: ModulesLambdaLayer }
   environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
   events:
     - httpApi: '*'
 connect:
   timeout: 10
   handler: handler/websocket.connect
+  layers:
+    - { Ref: ModulesLambdaLayer }
   environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
   events:
     - websocket:
@@ -14,6 +18,8 @@ connect:
 disconnect:
   timeout: 10
   handler: handler/websocket.disconnect
+  layers:
+    - { Ref: ModulesLambdaLayer }
   environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
   events:
     - websocket:
@@ -21,6 +27,8 @@ disconnect:
 message:
   timeout: 20
   handler: handler/websocket.message
+  layers:
+    - { Ref: ModulesLambdaLayer }
   environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
   events:
     - websocket:
@@ -28,6 +36,8 @@ message:
 logger:
   timeout: 5
   handler: handler/logger.handler
+  layers:
+    - { Ref: ModulesLambdaLayer }
   environment: ${file(.deploy/env/${opt:stage, self:provider.stage}.js)}
   events:
     - cloudwatchLog:

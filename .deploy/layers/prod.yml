@@ -1,0 +1,6 @@
+layers:
+  modules:
+    path: nodejs
+    name: ${self:service}-${self:provider.stage}-node_modules
+    description: Node modules layer
+    retain: true
