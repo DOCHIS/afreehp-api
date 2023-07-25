@@ -5,7 +5,7 @@
 이 프로젝트와 이 프로젝트에서 사용된 Third-Party의 라이센스 사항은 [LICENSE.md](/LICENSE.md)를 참고해주세요.
 
 ## Third-Party
-이 프로젝트에 사용 된 Third-Party에 대한 개별 라이센스는 [License(Third-Party 포함)](License.md)와 [package.json](package.json)을 참고해주세요.
+이 프로젝트에 사용 된 Third-Party에 대한 개별 라이센스는 [License(Third-Party 포함)](/LICENSE.md)와 [package.json](package.json)을 참고해주세요.
 일부 Third-Party는 상업용 라이센스를 사용하고 있으므로 주의가 필요합니다.
 
 ## Documentation
