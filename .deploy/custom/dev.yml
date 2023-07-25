@@ -4,10 +4,10 @@ custom:
   capacities:
     - table: afreehpLogTable
       read:
-        minimum: 5
-        maximum: 100
-        usage: 0.6
+        minimum: 20
+        maximum: 500
+        usage: 0.5
       write:
-        minimum: 5
-        maximum: 100
+        minimum: 20
+        maximum: 500
         usage: 0.5

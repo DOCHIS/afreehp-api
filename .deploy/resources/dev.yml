@@ -32,8 +32,8 @@ resources:
             KeyType: HASH
         BillingMode: PROVISIONED
         ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
+          ReadCapacityUnits: 20
+          WriteCapacityUnits: 20
         TimeToLiveSpecification:
           AttributeName: ttl
           Enabled: true

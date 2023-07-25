@@ -30,7 +30,7 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        BillingMode: PROVISIONED
+        BillingMode: PAY_PER_REQUEST
         TimeToLiveSpecification:
           AttributeName: ttl
           Enabled: true
