@@ -18,14 +18,21 @@ module.exports.start = async function (req, res) {
   if (!widgetUrl.startsWith("http://afreehp.kr/page/"))
     return res.json({
       success: false,
-      message: "위젯 URL이 아프리카 도우미 위젯 URL이 아닙니다.",
+      message: "위젯 URL이 아프리카 도우미 위젯 URL이 아닙니다. (URL은 http://afreehp.kr/page/로 시작합니다.)",
+    });
+  
+  // x9jhl6aK1dLK1ZU 로 끝나는 URL은 허용하지 않음
+  if (widgetUrl.endsWith("x9jhl6aK1dLK1ZU "))
+    return res.json({
+      success: false,
+      message: "후원 위젯 URL이 아닙니다. (x9jhl6aK1dLK1ZU로 끝나는 주소는 후원 자막 URL입니다.)",
     });
 
   // 위젯 URL 검증
   if (!widgetUrl.endsWith("x8bYmqSVwJY"))
     return res.json({
       success: false,
-      message: "올바른 위젯 URL을 입력해주세요.",
+      message: "올바른 위젯 URL을 입력해주세요. (위젯 URL은 x8bYmqSVwJY로 끝나야 합니다.)",
     });
 
   // 기존 쿠기 삭제
