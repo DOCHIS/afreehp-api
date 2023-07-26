@@ -11,7 +11,7 @@ dynamodb는 AWS의 권장사항에 따라 Single Table Design을 채택하였습
 |||CMD#{ID}|Alert Box Cmd 정보|
 |alertbox uid|ALERTBOX|UID#{UID}|Alert Box UID 매칭 정보|
 |connection|CONNECTION|CONNECTION#{ID}|Socket Connection 정보|
-|||CONNECTION|CONNECTION#{ID}|CONNECTION#{ID}#ROOM#{ROOM}|Connection 연결된 룸 정보|
+||CONNECTION|CONNECTION#{ID}#ROOM#{ROOM}|Connection 연결된 룸 정보|
 |uuid|UUID#{ID}|UUID#{ID}|UUID 정보|
 
 ## 엑세스 패턴

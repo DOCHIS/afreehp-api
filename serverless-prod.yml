@@ -17,11 +17,12 @@ plugins:
 
 # functions 설정
 functions:
+  logger: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):logger}
   app: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):app}
   connect: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):connect}
   disconnect: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):disconnect}
   message: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):message}
-  logger: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):logger}
+  schedule: ${file(.deploy/functions/${opt:stage, self:provider.stage}.yml):schedule}
 
 # resources 설정
 resources: ${file(.deploy/resources/${opt:stage, self:provider.stage}.yml):resources}

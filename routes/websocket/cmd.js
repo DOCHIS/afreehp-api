@@ -31,7 +31,7 @@ module.exports = async function (data, event) {
   await dynamodb.saveItem({
     PK: `CONNECTION`,
     SK: `CONNECTION#${connectionId}`,
-    ttl: Math.floor(Date.now() / 1000) + 60 * 5 /* 5분 */,
+    ttl: Math.floor(Date.now() / 1000) + 60 * 6 /* 6분 */,
     alertbox_idx: alertbox_idx,
     connection_id: connectionId,
     connection_time: Date.now(),
@@ -72,7 +72,7 @@ module.exports = async function (data, event) {
       alertbox_idx: alertbox_idx,
       connection_id: connectionId,
       connection_time: Date.now(),
-      ttl: Math.floor(Date.now() / 1000) + 60 * 5 /* 5분 */,
+      ttl: Math.floor(Date.now() / 1000) + 60 * 6 /* 6분 */,
     })
   }
 }

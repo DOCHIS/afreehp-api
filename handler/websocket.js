@@ -7,21 +7,24 @@ global.log = require("../libraries/log");
 
 // 소켓 커넥션
 module.exports.connect = async (event) => {
-  log.info("==== WEB SOCKET START ====")
+  log.info("==== WEB SOCKET START ====");
   log.info("┃handler│websocket│connect┃event", JSON.stringify(event, null, 2));
   log.info("┃handler│websocket│connect");
   return { statusCode: 200 };
 };
 
 module.exports.disconnect = async () => {
-  log.info("==== WEB SOCKET START ====")
-  log.info("┃handler│websocket│disconnect┃event", JSON.stringify(event, null, 2));
+  log.info("==== WEB SOCKET START ====");
+  log.info(
+    "┃handler│websocket│disconnect┃event",
+    JSON.stringify(event, null, 2)
+  );
   log.info("┃handler│websocket│disconnect");
   return { statusCode: 200 };
 };
 
 module.exports.message = async (event) => {
-  log.info("==== WEB SOCKET START ====")
+  log.info("==== WEB SOCKET START ====");
   log.info("┃handler│websocket│message┃event", JSON.stringify(event, null, 2));
   log.info("┃handler│websocket│message");
 
@@ -49,21 +52,6 @@ module.exports.message = async (event) => {
     log.info("┃handler│websocket│message┃connection", connection);
 
     if (connection) {
-      // TTL 연장
-      if (connection.ttl > Math.floor(Date.now() / 1000)) {
-        log.info("┃handler│websocket│message┃TTL", connectionId);
-        await dynamodb.updateItemDetail(
-          { PK: `CONNECTION`, SK: `CONNECTION#${connectionId}` },
-          "SET #ttl = :ttl",
-          "begins_with(SK, :SK)",
-          {
-            ":ttl": Math.floor(Date.now() / 1000) + 60 * 5 /* 5분 */,
-            ":SK": `CONNECTION#${connectionId}`,
-          },
-          { "#ttl": "ttl" }
-        );
-      }
-
       // 라우팅
       log.info("┃handler│websocket│message┃routing", command);
       switch (command) {

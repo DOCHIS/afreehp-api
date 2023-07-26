@@ -73,39 +73,6 @@ class awsDynamodb {
   }
 
   /**
-   * get unique SK
-   * @description 중복되지 않는 정렬키를 생성합니다.
-   * @param {string} PK 파티션키 (required)
-   * @param {string} SKI 정렬키 식별자 (required)
-   *  @example ALERTBOX#{ID}의 아이디를 가져올때는 SK에 "ALERTBOX" 입력
-   *  @example CMD#{ID}의 아이디를 가져올때는 SK에 "CMD" 입력
-   * @param {number} length SKI의 길이 (optional)
-   * @returns {object} 결과값
-   */
-  async getUniqueSK(PK, SKI, length = 9) {
-    log.info("┃libraries│awsDynamodb│getUniqueSK");
-    log.info("┃libraries│awsDynamodb│getUniqueSK┃PK", PK);
-    log.info("┃libraries│awsDynamodb│getUniqueSK┃SKI", SKI);
-    log.info("┃libraries│awsDynamodb│getUniqueSK┃length", length);
-
-    if (!PK) throw new Error("PK is required");
-    if (!SKI) throw new Error("SKI is required");
-
-    let SK;
-    do {
-      let rand = [];
-      const letters =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      for (let i = 0; i < length; i++) {
-        rand.push(letters[Math.floor(Math.random() * letters.length)]);
-      }
-      SK = SKI + rand.join("");
-    } while (await this.getItem(PK, SK));
-
-    return SK;
-  }
-
-  /**
    * get unique PK
    * @description 전체 파티션에 걸쳐 중복되지 않는 uuid를 생성합니다.
    * @warning PK나 SK에 사용하는 키는 getUniqueSK를 사용하세요.
@@ -172,32 +139,31 @@ class awsDynamodb {
 
     if (!item.PK) throw new Error("PK is required");
 
-    const data = { ...item };
-    delete data.PK;
-    if (data?.SK) delete data.SK;
-    if (Object.keys(data).length == 0)
-      throw new Error("Update data is required");
-
-    let UpdateExpression = "SET";
-    let ExpressionAttributeNames = {};
-    let ExpressionAttributeValues = {};
-    let i = 0;
-    for (const [key, value] of Object.entries(data)) {
-      UpdateExpression += ` #${key} = :${key},`;
-      ExpressionAttributeNames[`#${key}`] = key;
-      ExpressionAttributeValues[`:${key}`] = value;
-      i++;
-    }
-
-    UpdateExpression = UpdateExpression.slice(0, -1);
-
+    // PK와 SK를 조건으로하고 그 외의 키를 업데이트합니다.
+    // SK가 없으면 PK만 조건으로 업데이트합니다.
     const params = {
       TableName: this.table,
       Key: marshall({ PK: item.PK, SK: item.SK }),
-      UpdateExpression,
-      ExpressionAttributeNames,
-      ExpressionAttributeValues,
+      UpdateExpression: `SET ${Object.keys(item)
+        .filter((key) => key !== "PK" && key !== "SK")
+        .map((key) => `#${key} = :${key}`)
+        .join(", ")}`,
+      ExpressionAttributeValues: marshall(
+        Object.keys(item)
+          .filter((key) => key !== "PK" && key !== "SK")
+          .reduce((acc, key) => {
+            acc[`:${key}`] = item[key];
+            return acc;
+          }, {})
+      ),
+      ExpressionAttributeNames: Object.keys(item)
+        .filter((key) => key !== "PK" && key !== "SK")
+        .reduce((acc, key) => {
+          acc[`#${key}`] = key;
+          return acc;
+        }, {}),
     };
+    log.info("┃libraries│awsDynamodb│updateItem┃params", params);
 
     const command = new UpdateItemCommand(params);
     return await this.client.send(command);
