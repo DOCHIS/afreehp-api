@@ -207,4 +207,5 @@ $("#testForm").submit(function (e) {
  */
 $("#socketLogsClean").click(function () {
   $("#socketLogs").html("");
+  chatHistoryBody.scrollTop(0);
 });
