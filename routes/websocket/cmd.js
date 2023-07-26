@@ -24,6 +24,12 @@ module.exports = async function (data, event, connection) {
     })
   )
 
+  // CMD TTL
+  const TTL =
+    process.env.STAGE === "dev"
+      ? 60 * 60 * 24 * 7 // 7일
+      : 60 * 60 * 24 * 30 // 30일
+
   // CMD 기록
   await dynamodb.putItem({
     PK: `ALERTBOX#${connection.alertbox_idx}`,
@@ -31,6 +37,7 @@ module.exports = async function (data, event, connection) {
     cmd,
     alertbox_idx: connection.alertbox_idx,
     created_at: Date.now(),
+    ttl: Math.floor(Date.now() / 1000) + TTL,
   })
   console.log("━ CMD saved")
 
