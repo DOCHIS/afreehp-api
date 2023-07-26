@@ -7,16 +7,22 @@ global.log = require("../libraries/log");
 
 // 소켓 커넥션
 module.exports.connect = async (event) => {
+  log.info("==== WEB SOCKET START ====")
+  log.info("┃handler│websocket│connect┃event", JSON.stringify(event, null, 2));
   log.info("┃handler│websocket│connect");
   return { statusCode: 200 };
 };
 
 module.exports.disconnect = async () => {
+  log.info("==== WEB SOCKET START ====")
+  log.info("┃handler│websocket│disconnect┃event", JSON.stringify(event, null, 2));
   log.info("┃handler│websocket│disconnect");
   return { statusCode: 200 };
 };
 
 module.exports.message = async (event) => {
+  log.info("==== WEB SOCKET START ====")
+  log.info("┃handler│websocket│message┃event", JSON.stringify(event, null, 2));
   log.info("┃handler│websocket│message");
 
   const apigw = new awsApiGateway();
