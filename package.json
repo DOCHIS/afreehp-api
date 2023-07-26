@@ -7,7 +7,7 @@
     "deploy:dev": "serverless deploy --config serverless-dev.yml",
     "print:prod": "serverless print --config serverless-prod.yml",
     "print:dev": "serverless print --config serverless-dev.yml",
-    "serve": "serverless offline --config serverless-local.yml --httpPort 80",
+    "serve": "serverless offline --config serverless-local.yml",
     "watch": "nodemon -e js,ts,yml -x npm run serve"
   },
   "repository": {

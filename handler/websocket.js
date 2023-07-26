@@ -5,31 +5,52 @@ const awsApiGateway = require("../libraries/awsApiGateway");
 console.log(">> process.env.DEBUG", process.env.DEBUG);
 global.log = require("../libraries/log");
 
+const apigw = new awsApiGateway();
+const dynamodb = new awsDynamoDB();
+
 // 소켓 커넥션
 module.exports.connect = async (event) => {
   log.info("==== WEB SOCKET START ====");
-  log.info("┃handler│websocket│connect┃event", JSON.stringify(event, null, 2));
+  log.info("┃handler│websocket│connect┃event", event);
   log.info("┃handler│websocket│connect");
   return { statusCode: 200 };
 };
 
-module.exports.disconnect = async () => {
+module.exports.disconnect = async (event) => {
   log.info("==== WEB SOCKET START ====");
-  log.info(
-    "┃handler│websocket│disconnect┃event",
-    JSON.stringify(event, null, 2)
-  );
+  log.info("┃handler│websocket│disconnect┃event", event);
   log.info("┃handler│websocket│disconnect");
+
+  const connectionId = event.requestContext.connectionId;
+  log.info("┃handler│websocket│disconnect┃connectionId", connectionId);
+
+  // 커넥션 정보 조회
+  const connection = await dynamodb.queryItems({
+    KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
+    ExpressionAttributeValues: {
+      ":PK": `CONNECTION`,
+      ":SK": `CONNECTION#${connectionId}`,
+    },
+    ProjectionExpression: "SK",
+  });
+  log.info("┃handler│websocket│disconnect┃connection", connection);
+
+  if (connection.Items.length > 0) {
+    for (const item of connection.Items) {
+      await dynamodb.deleteItem({
+        PK: `CONNECTION`,
+        SK: item.SK,
+      });
+    }
+  }
+
   return { statusCode: 200 };
 };
 
 module.exports.message = async (event) => {
   log.info("==== WEB SOCKET START ====");
-  log.info("┃handler│websocket│message┃event", JSON.stringify(event, null, 2));
+  log.info("┃handler│websocket│message┃event", event);
   log.info("┃handler│websocket│message");
-
-  const apigw = new awsApiGateway();
-  const dynamodb = new awsDynamoDB();
 
   const body = event.body;
   log.info("┃handler│websocket│message┃body", body);
@@ -64,7 +85,11 @@ module.exports.message = async (event) => {
       }
     } else {
       log.info("┃handler│websocket│message┃connection not found", connectionId);
-      await apigw.deleteConnection(connectionId);
+      try {
+        await apigw.deleteConnection(connectionId);
+      } catch (e) {
+        log.error("┃handler│websocket│message┃deleteConnection error", e);
+      }
     }
   }
 
