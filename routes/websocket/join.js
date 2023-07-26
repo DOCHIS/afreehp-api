@@ -12,8 +12,6 @@ module.exports = async function (data, event) {
   const { alertbox_idx, rooms } = JSON.parse(data)
   const connectionId = event.requestContext.connectionId
 
-  console.log("JOIN", alertbox_idx, rooms)
-
   // 인증 처리
   const alertbox = await dynamodb.getItem(
     `ALERTBOX#${alertbox_idx}`,

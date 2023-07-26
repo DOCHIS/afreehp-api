@@ -11,17 +11,14 @@ const dynamodb = new awsDynamoDB();
 // 소켓 커넥션
 module.exports.connect = async (event) => {
   log.info("==== WEB SOCKET START ====");
-  log.info("┃handler│websocket│connect┃event", JSON.stringify(event, null, 2));
+  log.info("┃handler│websocket│connect┃event", event);
   log.info("┃handler│websocket│connect");
   return { statusCode: 200 };
 };
 
 module.exports.disconnect = async (event) => {
   log.info("==== WEB SOCKET START ====");
-  log.info(
-    "┃handler│websocket│disconnect┃event",
-    JSON.stringify(event, null, 2)
-  );
+  log.info("┃handler│websocket│disconnect┃event", event);
   log.info("┃handler│websocket│disconnect");
 
   const connectionId = event.requestContext.connectionId;
@@ -52,7 +49,7 @@ module.exports.disconnect = async (event) => {
 
 module.exports.message = async (event) => {
   log.info("==== WEB SOCKET START ====");
-  log.info("┃handler│websocket│message┃event", JSON.stringify(event, null, 2));
+  log.info("┃handler│websocket│message┃event", event);
   log.info("┃handler│websocket│message");
 
   const body = event.body;
