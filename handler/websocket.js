@@ -70,6 +70,9 @@ module.exports.message = async (event) => {
         case "CMD":
           await require("../routes/websocket/cmd")(data, event, connection);
           break;
+        case "PING":
+          await require("../routes/websocket/ping")(data, event, connection);
+          break;
       }
     } else {
       log.info("┃handler│websocket│message┃connection not found", connectionId);

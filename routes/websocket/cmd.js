@@ -1,107 +1,78 @@
 const awsApiGateway = require("../../libraries/awsApiGateway")
 const awsDynamoDB = require("../../libraries/awsDynamodb")
-const { v4: uuidv4 } = require("uuid")
 
 /**
  * CMD 이벤트 처리
  * @description 클라로 부터 전달받은 CMD 데이터를 DynamoDB에 저장하고 SQS로 전달하여 멀티캐스트 처리
  */
-module.exports = async function (data, event, connection) {
-  console.log("━ START CMD")
-
+module.exports = async function (data, event) {
   const apigw = new awsApiGateway()
   const dynamodb = new awsDynamoDB()
-  const nanoTime = process.hrtime.bigint().toString()
-  const SK = `CMD#${nanoTime}#${uuidv4()}`
-  const cmd = JSON.parse(data)
 
-  // log
-  console.log(
-    "━ params",
-    JSON.stringify({
-      SK,
-      cmd,
-    })
+  const { alertbox_idx, rooms } = JSON.parse(data)
+  const connectionId = event.requestContext.connectionId
+
+  console.log("JOIN", alertbox_idx, rooms)
+
+  // 인증 처리
+  const alertbox = await dynamodb.getItem(
+    `ALERTBOX#${alertbox_idx}`,
+    `ALERTBOX#${alertbox_idx}`
   )
 
-  // CMD TTL
-  const TTL =
-    process.env.STAGE === "dev"
-      ? 60 * 60 * 24 * 7 // 7일
-      : 60 * 60 * 24 * 30 // 30일
+  if (!alertbox) {
+    return await apigw.sendMessage({
+      ConnectionId: connectionId,
+      Data: "JOIN\tFAIL",
+    })
+  }
 
-  // CMD 기록
-  await dynamodb.putItem({
-    PK: `ALERTBOX#${connection.alertbox_idx}`,
-    SK: SK,
-    cmd,
-    alertbox_idx: connection.alertbox_idx,
-    created_at: Date.now(),
-    ttl: Math.floor(Date.now() / 1000) + TTL,
+  // 커넥션 정보 생성
+  await dynamodb.saveItem({
+    PK: `CONNECTION`,
+    SK: `CONNECTION#${connectionId}`,
+    ttl: Math.floor(Date.now() / 1000) + 60 * 5 /* 5분 */,
+    alertbox_idx: alertbox_idx,
+    connection_id: connectionId,
+    connection_time: Date.now(),
   })
-  console.log("━ CMD saved")
 
-  // 이 CMD를 수신받을 커넥션 목록 만들기
-  let recvers = []
-  try {
-    /**
-     * ALL을 수신받는 커넥션 목록 조회
-     */
-    const allRecvers = await dynamodb.queryItems({
-      KeyConditionExpression: "PK = :PK",
-      FilterExpression: "connection_room = :connection_room",
-      ExpressionAttributeValues: {
-        ":PK": `CONNECTION`,
-        ":connection_room": `${connection.alertbox_idx}-ALL`,
-      },
-      ProjectionExpression: "SK",
+  // 해당 커넥션의 기존 ROOMS 정보 조회 및 삭제
+  const connectionRooms = await dynamodb.queryItems({
+    KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
+    ExpressionAttributeValues: {
+      ":PK": `CONNECTION`,
+      ":SK": `CONNECTION#${connectionId}#ROOM#`,
+    },
+    ProjectionExpression: "SK",
+  })
+  if (connectionRooms.Items.length > 0) {
+    for (const connectionRoom of connectionRooms.Items) {
+      await dynamodb.deleteItem(`CONNECTION`, connectionRoom.SK)
+    }
+  }
+
+  // rooms 중복 제거
+  const uniqueRooms = [...new Set(rooms)]
+
+  // 룸 요청이 50개 초과면 에러
+  if (uniqueRooms.length > 50) {
+    return await apigw.sendMessage({
+      ConnectionId: connectionId,
+      Data: "JOIN\tFAIL",
     })
-    if (allRecvers.Items.length > 0) {
-      for (const allRecver of allRecvers.Items) {
-        recvers.push(allRecver.SK)
-      }
-    }
+  }
 
-    /**
-     * cmd.type을 수신받는 커넥션 목록 조회
-     * PK = CONNECTION, SK #ROOM#<connectionId>-type 로 끝나는 커넥션 목록 조회
-     */
-    const typeRecvers = await dynamodb.queryItems({
-      KeyConditionExpression: "PK = :PK",
-      FilterExpression: "connection_room = :connection_room",
-      ExpressionAttributeValues: {
-        ":PK": `CONNECTION`,
-        ":connection_room": `${connection.alertbox_idx}-${cmd.type}`,
-      },
-      ProjectionExpression: "SK",
+  // 커넥션 ROOMS 정보 생성
+  for (const room of uniqueRooms) {
+    await dynamodb.putItem({
+      PK: `CONNECTION`,
+      SK: `CONNECTION#${connectionId}#ROOM#${room}`,
+      connection_room: room,
+      alertbox_idx: alertbox_idx,
+      connection_id: connectionId,
+      connection_time: Date.now(),
+      ttl: Math.floor(Date.now() / 1000) + 60 * 5 /* 5분 */,
     })
-    if (typeRecvers.Items.length > 0) {
-      for (const typeRecver of typeRecvers.Items) {
-        recvers.push(typeRecver.SK)
-      }
-    }
-
-    // SK 중복 제거
-    recvers = [...new Set(recvers)]
-    console.log("━ recvers", recvers)
-
-    // 소켓 발송
-    for (const recver of recvers) {
-      const split = recver.split("#")
-      const connectionId = split[1]
-
-      try {
-        const params = {
-          ConnectionId: connectionId,
-          Data: "CMD\t" + data,
-        }
-        console.log("━ recverParams", params)
-        await apigw.sendMessage(params)
-      } catch (e) {
-        console.log(e)
-      }
-    }
-  } catch (e) {
-    console.log(e)
   }
 }
