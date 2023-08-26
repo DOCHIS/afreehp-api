@@ -30,10 +30,7 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        BillingMode: PROVISIONED
-        ProvisionedThroughput:
-          ReadCapacityUnits: 20
-          WriteCapacityUnits: 20
+        BillingMode: PAY_PER_REQUEST
         TimeToLiveSpecification:
           AttributeName: ttl
           Enabled: true

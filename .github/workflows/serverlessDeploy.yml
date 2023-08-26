@@ -29,7 +29,6 @@ jobs:
       - name: Install Global Dependencies
         run: |
           npm install -g serverless
-          npm install -g serverless-dynamodb-autoscaling
           npm install -g serverless-plugin-layer-manager
       - name: Install dependencies
         run: |
